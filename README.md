@@ -1,2 +1,0 @@
-# pittblog
-a blog.
