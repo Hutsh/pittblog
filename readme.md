@@ -1,3 +1,0 @@
-# Pitt Blog
-
-A Blog.
