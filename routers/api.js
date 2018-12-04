@@ -22,20 +22,20 @@ router.post('/user/register', function (req, res, next) {
   // 用户是否为空
   if (username == '') {
     responseData.code = 1
-    responseData.message = '用户名不能为空'
+    responseData.message = 'Username can not be empty!'
     res.json(responseData)
     return
   }
   // 密码不能为空
   if (password === '') {
     responseData.code = 2
-    responseData.message = '密码不能为空'
+    responseData.message = 'Password can not be empty!'
     res.json(responseData)
   }
   // 两次输入的密码必须一致
   if (password !== repassword) {
     responseData.code = 3
-    responseData.message = '两次输入的密码不一致'
+    responseData.message = 'Two passwords didn\'t match, Try again.'
     res.json(responseData)
   }
 
@@ -48,7 +48,7 @@ router.post('/user/register', function (req, res, next) {
       console.log(userInfo)
       // 表示数据库中有该记录
       responseData.code = 4
-      responseData.message = '用户名已经被注册了'
+      responseData.message = 'Username already exists!'
       res.json(responseData)
       return
     }
@@ -60,7 +60,7 @@ router.post('/user/register', function (req, res, next) {
     return user.save()
   }).then(function (newUserInfo) {
     console.log(newUserInfo)
-    responseData.message = '注册成功'
+    responseData.message = 'Register Success!'
     res.json(responseData)
   })
 
@@ -96,10 +96,12 @@ router.post('/user/register', function (req, res, next) {
 router.post('/user/login', function (req, res) {
   var username = req.body.username
   var password = req.body.password
+  console.log(username);
+  console.log(password);
 
   if (username === '' || password === '') {
     responseData.code = 1
-    responseData.message = '用户名和密码不能为空'
+    responseData.message = 'Username or Password can not be empty'
     res.json(responseData)
     return
   }
@@ -111,12 +113,12 @@ router.post('/user/login', function (req, res) {
   }).then(function (userInfo) {
     if (!userInfo) {
       responseData.code = 2
-      responseData.message = '用户名或密码错误'
+      responseData.message = 'Username and Password does not match!'
       res.json(responseData)
       return
     }
     // 用户名和密码是正确的
-    responseData.message = '登录成功'
+    responseData.message = 'Login Success!'
     responseData.userInfo = {
       _id: userInfo._id,
       username: userInfo.username

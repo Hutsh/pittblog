@@ -19,7 +19,7 @@ app.set('views', './views')
 app.set('view engine', 'html')
 swig.setDefaults({ cache: false }) // disable chche
 
-// app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json({ type: 'application/json' })) // RESTful
 
 // 设置cookie
