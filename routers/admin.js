@@ -338,6 +338,8 @@ router.get('/content', function(req, res) {
   // res.render('admin/content_index',{
   //   userInfo: req.userInfo
   // })
+  // console.log("req:------------------");
+  // console.log(req.query.page);
 
 
   if(1){

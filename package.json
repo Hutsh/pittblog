@@ -23,6 +23,7 @@
     "node-restful": "0.2.6",
     "objectid-to-timestamp": "1.3.0",
     "sha1": "1.1.1",
+    "simplemde": "1.11.2",
     "swig": "1.4.2",
     "winston": "3.1.0"
   },
