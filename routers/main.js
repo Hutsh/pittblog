@@ -40,11 +40,11 @@ router.use(function (req, res, next) {
 /*
 * 首页
 * */
-router.get('/', function(req, res, next) {
+router.get('(/page/)?:page?', function(req, res, next) {
 
     data.category = req.query.category || '';
     data.count = 0;
-    data.page = Number(req.query.page || 1);
+    data.page = Number(req.params.page || 1);
     data.limit = 10;
     data.pages = 0;
 
@@ -76,7 +76,43 @@ router.get('/', function(req, res, next) {
     })
 });
 
+//replaced by router.get('/post/:id',
+// router.get('/view', function (req, res){
 
+//     var contentId = req.query.contentid || '';
+
+//     Content.findOne({
+//         _id: contentId
+//     }).then(function (content) {
+//         data.content = content;
+
+//         content.views++;
+//         content.save();
+
+//         res.render('main/view', data);
+//     });
+
+// });
+
+
+//mod for router.get('/view', chage /view to /post and RESTFUL
+router.get('/post/:id', function (req, res){
+	console.log('Calling: GET /post/:id='+req.params.id);
+
+    var contentId = req.params.id || '';
+
+    Content.findOne({
+        _id: contentId
+    }).then(function (content) {
+        data.content = content;
+
+        content.views++;
+        content.save();
+
+        res.render('main/view', data);
+    });
+
+});
 
 
 

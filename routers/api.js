@@ -12,6 +12,7 @@ router.use(function (req, res, next) {
   next()
 })
 
+//todo : restful put
 router.post('/user/register', function (req, res, next) {
   var username = req.body.username
   var password = req.body.password
@@ -93,6 +94,7 @@ router.post('/user/register', function (req, res, next) {
   // }
 })
 
+//todo : restful
 router.post('/user/login', function (req, res) {
   var username = req.body.username
   var password = req.body.password

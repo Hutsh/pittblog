@@ -119,9 +119,11 @@ router.get('/category', function(req, res) {
 
 });
 
+
 /*
 * 分类的添加
 * */
+//todo : restful
 router.get('/category/add', function(req, res) {
     console.log(req.body);
     res.render('admin/category_add', {
@@ -134,6 +136,7 @@ router.get('/category/add', function(req, res) {
 /*
 * 分类的保存
 * */
+//todo : restful
 router.post('/category/add', function(req, res) {
 
     console.log(req.body);
@@ -186,6 +189,7 @@ router.post('/category/add', function(req, res) {
 /*
 * 分类修改
 * */
+//todo : restful
 router.get('/category/edit', function(req, res) {
 
     //获取要修改的分类的信息，并且用表单的形式展现出来
@@ -214,6 +218,7 @@ router.get('/category/edit', function(req, res) {
 /*
 * 分类的修改保存
 * */
+//todo : restful
 router.put('/category/edit', function(req, res) {
 
     //获取要修改的分类的信息，并且用表单的形式展现出来
@@ -315,6 +320,7 @@ router.put('/category/edit', function(req, res) {
 // *
 // * 分类删除
 // * */
+//todo : restful
 router.get('/category/delete/', function(req, res) {
 
     //获取要删除的分类的id
@@ -333,6 +339,7 @@ router.get('/category/delete/', function(req, res) {
 /*
 * 内容首页
 * */
+//todo : restful
 router.get('/content', function(req, res) {
 
   // res.render('admin/content_index',{
@@ -383,6 +390,7 @@ router.get('/content', function(req, res) {
 /*
  * 内容添加页面
  * */
+ //todo : restful
 router.get('/content/add', function(req, res) {
 
     Category.find().sort({_id: -1}).then(function(categories) { // get all cats
@@ -450,6 +458,7 @@ router.post('/content/add', function(req, res) {
 /*
 * 修改内容
 * */
+//todo : restful
 router.get('/content/edit', function(req, res) {
 
     var id = req.query.id || '';
@@ -505,6 +514,7 @@ router.get('/content/edit', function(req, res) {
  // change to put
  // add frontend ajax
  * */
+ //todo : restful put
 router.post('/content/edit', function(req, res) {
     var id = req.query.id || '';
 
