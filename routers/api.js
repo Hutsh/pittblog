@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var User = require('../models/User')
+var Content = require('../models/Content');
 
 var responseData
 
@@ -17,8 +18,6 @@ router.post('/user/register', function (req, res, next) {
   var username = req.body.username
   var password = req.body.password
   var repassword = req.body.repassword
-  console.log("------------")
-  console.log(req.body)
 
   // 用户是否为空
   if (username == '') {
@@ -138,5 +137,45 @@ router.get('/user/logout', function (req, res) {
   req.cookies.set('userInfo', null)
   res.json(responseData)
 })
+
+/*
+* 获取指定文章的所有评论
+* */
+router.get('/comment', function(req, res) {
+    var contentId = req.query.contentid || '';
+
+    Content.findOne({
+        _id: contentId
+    }).then(function(content) {
+        responseData.data = content.comments;
+        res.json(responseData);
+    })
+});
+
+/*
+* 评论提交
+* */
+router.post('/comment/post', function(req, res) {
+    //内容的id
+    var contentId = req.body.contentid || ''; //todo: contentid ->postid
+    var postData = {
+        username: req.userInfo.username,
+        postTime: new Date(),
+        content: req.body.content
+    };
+
+    //查询当前这篇内容的信息
+    Content.findOne({
+        _id: contentId
+    }).then(function(content) {
+        content.comments.push(postData);
+        return content.save();
+    }).then(function(newContent) {
+        responseData.message = '评论成功';
+        responseData.data = newContent;
+        res.json(responseData);
+    });
+});
+
 
 module.exports = router

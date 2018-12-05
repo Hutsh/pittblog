@@ -15,6 +15,7 @@ module.exports = new mongoose.Schema({
         defalt: 'DefaltCategory'
     },
     // wait fix: change catgories to lables array
+    //todo : support multiple catetories
 
 
     //内容标题
@@ -52,10 +53,10 @@ module.exports = new mongoose.Schema({
         default: ''
     },
 
-    // //评论
-    // comments: {
-    //     type: Array,
-    //     default: []
-    // }
+    //评论
+    comments: {
+        type: Array,
+        default: []
+    }
 
 });

@@ -1,4 +1,4 @@
-var prepage = 10;
+var prepage = 5;
 var page = 1;
 var pages = 0;
 var comments = [];
@@ -55,24 +55,24 @@ function renderComment() {
 
     if (page <= 1) {
         page = 1;
-        $lis.eq(0).html('<span>没有上一页了</span>');
+        $lis.eq(0).html('<span><i class="fas fa-step-backward"></i></span>');
     } else {
-        $lis.eq(0).html('<a href="javascript:;">上一页</a>');
+        $lis.eq(0).html('<a href="javascript:;"><i class="fas fa-angle-double-left"></i></a>');
     }
     if (page >= pages) {
         page = pages;
-        $lis.eq(2).html('<span>没有下一页了</span>');
+        $lis.eq(2).html('<span><i class="fas fa-step-forward"></i></span>');
     } else {
-        $lis.eq(2).html('<a href="javascript:;">下一页</a>');
+        $lis.eq(2).html('<a href="javascript:;"><i class="fas fa-angle-double-right"></i></a>');
     }
 
     if (comments.length == 0) {
-        $('.messageList').html('<div class="messageBox"><p>还没有评论</p></div>');
+        $('.messageList').html('<div class="messageBox"><h4>Be the first one to leave comment!</h4></div>');
     } else {
         var html = '';
         for (var i=start; i<end; i++) {
             html += '<div class="messageBox">'+
-                '<p class="name clear"><span class="fl">'+comments[i].username+'</span><span class="fr">'+ formatDate(comments[i].postTime) +'</span></p><p>'+comments[i].content+'</p>'+
+                '<p class="commnet-info"><span class="commnet-user">'+comments[i].username+'</span><i>&nbsp;@&nbsp;</i><span class="commnet-time">'+ formatDate(comments[i].postTime) +'</span></p><p class="commnet-content">'+comments[i].content+'</p>'+
                 '</div>';
         }
         $('.messageList').html(html);
@@ -81,6 +81,16 @@ function renderComment() {
 }
 
 function formatDate(d) {
+    const monthNames = ["Jan", "Feb" , "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct" , "Nov", "Dec"]
+
     var date1 = new Date(d);
-    return date1.getFullYear() + '年' + (date1.getMonth()+1) + '月' + date1.getDate() + '日 ' + date1.getHours() + ':' + date1.getMinutes() + ':' + date1.getSeconds();
+
+    var houroffert = 1
+
+    date = date1.getDate(); date = ("0"+date).substr(-2);
+    hour = date1.getHours(); hour = (hour+houroffert)%24; hour = ("0"+hour).substr(-2);
+    min = date1.getMinutes(); min = ("0"+min).substr(-2);
+    sec = date1.getSeconds(); sec = ("0"+sec).substr(-2);
+
+    return date1.getFullYear() + ',' + monthNames[date1.getMonth()] + ' ' + date + ' <i class="far fa-clock"></i> ' + hour + ':' + min + ':' + sec;
 }

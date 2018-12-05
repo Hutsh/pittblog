@@ -3,34 +3,18 @@ var router = express.Router();
 
 var Category = require('../models/Category');
 var Content = require('../models/Content');
+var User = require('../models/User')
+
+
 
 var data;
-
-
-// router.get('/', function (req, res) {
-
-
-// 	var category = req.query.category || '';
-// 	var count = 0;
-// 	var page = Number(req.query.page || 1);
-// 	var limit = 10;
-// 	var pages = 0;
-
-// 	Category.find().then(function(categories) {
-// 		res.render('main/index.html', {
-// 			userInfo: req.userInfo,
-// 			categories: categories
-// 		})
-
-// 	})
-// })
-
 router.use(function (req, res, next) {
     data = {
         userInfo: req.userInfo,
         categories: []
     }
 
+//todo zhe li shi wei le dao hang lan de categories, keyi shanchu?
     Category.find().then(function(categories) {
         data.categories = categories;
         next();
@@ -105,6 +89,10 @@ router.get('/post/:id', function (req, res){
         _id: contentId
     }).then(function (content) {
         data.content = content;
+
+        u = User.findOne({ _id: userid = content.user });
+        console.log("HEREssssssssssssss");
+        console.log(u);
 
         content.views++;
         content.save();
