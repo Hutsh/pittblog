@@ -84,23 +84,26 @@ router.get('/post/:id', function (req, res){
 	console.log('Calling: GET /post/:id='+req.params.id);
 
     var contentId = req.params.id || '';
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    console.log(contentId);
 
     Content.findOne({
         _id: contentId
-    }).then(function (content) {
+    }).populate(['user']).then(function (content) {
         data.content = content;
-
-        u = User.findOne({ _id: userid = content.user });
-        console.log("HEREssssssssssssss");
-        console.log(u);
-
         content.views++;
         content.save();
+        // console.log(content.user.username);
 
         res.render('main/view', data);
     });
 
 });
+
+
+
+
+
 
 
 

@@ -5,6 +5,13 @@ $(function () {
   // add content
   $('#content-add-btn').on('click', function () {
     // 通过ajax提交请求
+    
+    // $('#html_container').wrapInner(simplemde.options.previewRender(simplemde.value()));
+    
+    // // const $codemirror = $('textarea[name="myTeatxarea"]').nextAll('.CodeMirror')[0].CodeMirror;
+    // // // $codemirror.getDoc().setValue("Blaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+    // // console.log(codemirror);
 
     $.ajax({
       type: 'post',

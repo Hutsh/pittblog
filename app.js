@@ -31,11 +31,11 @@ app.use(function (req, res, next) {
   if (req.cookies.get('userInfo')) {
     try {
       req.userInfo = JSON.parse(req.cookies.get('userInfo'))
-      console.log("req.userInfo type:" + typeof(req.userInfo));
+      // console.log("req.userInfo type:" + typeof(req.userInfo));
       // 获取当前登录用户的类型，是否是管理员
-      console.log("req.userInfo:" + req.userInfo.username);
+      // console.log("req.userInfo:" + req.userInfo.username);
       User.findById(req.userInfo._id).then(function (userInfo) {
-      	console.log("userInfo" + userInfo);
+      	// console.log("userInfo" + userInfo);
       	if(!userInfo){
       		req.userInfo.isAdmin = false
       	}else{

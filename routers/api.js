@@ -44,8 +44,8 @@ router.post('/user/register', function (req, res, next) {
     username: username
   }).then(function (userInfo) {
     if (userInfo) {
-      console.log('aaaaaaaaaaaaa')
-      console.log(userInfo)
+      // console.log('aaaaaaaaaaaaa')
+      // console.log(userInfo)
       // 表示数据库中有该记录
       responseData.code = 4
       responseData.message = 'Username already exists!'
@@ -59,7 +59,7 @@ router.post('/user/register', function (req, res, next) {
     })
     return user.save()
   }).then(function (newUserInfo) {
-    console.log(newUserInfo)
+    // console.log(newUserInfo)
     responseData.message = 'Register Success!'
     res.json(responseData)
   })
@@ -97,8 +97,8 @@ router.post('/user/register', function (req, res, next) {
 router.post('/user/login', function (req, res) {
   var username = req.body.username
   var password = req.body.password
-  console.log(username);
-  console.log(password);
+  // console.log(username);
+  // console.log(password);
 
   if (username === '' || password === '') {
     responseData.code = 1
