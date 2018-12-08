@@ -1,5 +1,17 @@
 var fs = require('fs');
 var express = require('express');
+var hljs = require('highlight.js')
+var md = require('markdown-it')({
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
+    }
+
+    return ''; // use external default escaping
+  }
+});
 var router = express.Router();
 
 var Category = require('../models/Category');
@@ -65,13 +77,16 @@ router.get('/post/:id', function(req, res) {
     console.log('Calling: GET /post/:id=' + req.params.id);
 
     var contentId = req.params.id || '';
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     console.log(contentId);
 
     Content.findOne({
         _id: contentId
     }).populate(['user']).then(function(content) {
+        console.log("----------------------------------------------");
+        console.log(content.content);
+        console.log("----------------------------------------------");
         data.content = content;
+        data.markedcontent = md.render(content.content)
         content.views++;
         content.save();
         // console.log(content.user.username);
