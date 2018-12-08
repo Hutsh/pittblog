@@ -4,19 +4,17 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<title>Huts's Blog</title>
+		<title>{{content.title}} | Pittblog</title>
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 		
 		<link href="/public/css/poststyle.css" rel="stylesheet">
 		<link href="/public/css/hue.css" rel="stylesheet">
-		<!-- todo: del jq 1.12 -->
-		<!-- <script src="/public/js/jquery-1.12.4.min.js"></script> -->
 		
 	</head>
 	<body>
-		<div class="container-panel"><!--整个页面-->
+		<div class="container-panel">
 		<header class="post-header">
 			<div class="menu-trigger menu-trigger-tri">
 				<i class="fas fa-align-right"></i>
@@ -26,7 +24,7 @@
 			<div class="post-info">
 				<i class="far fa-clock"></i>
 				<p>Time:</p>
-				<p>{{content.addTime|date('Y M d, H:i', 5*60)}}</p>
+				<p>{{content.addTime|date('Y M d, H:i', -4*60)}}</p>
 				<p>·</p>
 				<i class="far fa-bookmark"></i>
 				<p>Category: </p>
@@ -56,12 +54,6 @@
 								<button class="btn btn-secondary submit" type="button" id="messageBtn">Submit</button>
 							</div>
 						</div>
-						<!--            	    <p class="textLeft">zmouse</p>
-						<p class="textLeft clear">
-							<textarea id="messageContent"></textarea>
-							<input type="hidden" id="contentId" value="{{content.id}}">
-							<button id="messageBtn" class="submit">提交</button>
-						</p> -->
 						{%else%}
 						<div class="alert alert-secondary alert-dismissible fade show" role="alert">
 							Please <a href="#" class="alert-link" data-toggle="modal" data-target="#logincenter">Login</a> before leaving a commnet.
@@ -95,15 +87,16 @@
 						<div class="col-xs-12 col-sm-6">
 							<div class="category-list">
 								<p>Published in <span>{{content.addTime|date('d M Y')}}</span></p>
-								<p>By <a href="#">{{content.user.username}}</a> in category <a href="#">{{content.category}}</a></p>
+								<p>By <a href="#">{{content.user.username}}</a> in category <a href="/category/{{content.category}}">{{content.category}}</a></p>
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-4">
 							<div class="social">
 								<p>Share this article
 								</p><div class="social-links">
-								<a class="social-icon" href="#" data-platform="twitter" data-message="Message about this post" data-url="http://writertheme.com/post"><i class="fab fa-twitter"></i></a>
-								<a class="social-icon" href="#" data-platform="facebook" data-message="Message about this post" data-url="http://writertheme.com/post"><i class="fab fa-facebook-f"></i></a>
+								<a class="social-icon twitter customer share" href="https://twitter.com/share?&amp;text={{content.title}}" title="Twitter share" data-platform="twitter" data-message="Message about this post" data-url=""><i class="fab fa-twitter"></i></a>
+
+								<a class="social-icon facebook customer share" href="https://www.facebook.com/sharer.php?u={{content.title}}" data-platform="facebook" target="_blank" data-message="Message about this post" data-url=""><i class="fab fa-facebook-f"></i></a>
 								<a class="social-icon" data-platform="mail" href="mailto:hutsh@live.com"><i class="far fa-envelope-open"></i></a>
 							</div>
 						</div>
@@ -126,7 +119,7 @@
 				<a href="/archive"><i class="fas fa-archive"> &nbsp;</i>Archives</a>
 			</li>
 			<li>
-				<a href="#"><i class="fas fa-tags"> &nbsp;</i>Categories</a>
+				<a href="/category"><i class="fas fa-tags"> &nbsp;</i>Categories</a>
 			</li>
 			<br>
 			<li>

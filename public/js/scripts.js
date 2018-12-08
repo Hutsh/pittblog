@@ -57,7 +57,7 @@ $(function () {
   var $registerBox = $('#registerBox')
   var $userInfo = $('#userInfo')
 
-  // 切换到注册面板
+  // switch to register
   $loginBox.find('a.colMint').on('click', function () {
     $registerBox.show()
     $loginBox.hide()
@@ -66,7 +66,7 @@ $(function () {
     $('#Reg-button').show()
   })
 
-  // 切换到登录面板
+  // switch to login
   $registerBox.find('a.colMint').on('click', function () {
     $loginBox.show()
     $registerBox.hide()
@@ -75,17 +75,16 @@ $(function () {
     $('#Reg-button').hide()
   })
 
-  // 注册
+  // regester
   $('#Reg-button').find('button').on('click', function () {
-  // $registerBox.find('button').on('click', function () {
-    // 通过ajax提交请求
+
     $.ajax({
       type: 'post',
       url: '/api/user/register',
       data: JSON.stringify({
         username: $registerBox.find('[name="username"]').val(),
-        password: $registerBox.find('[name="password"]').val(),
-        repassword: $registerBox.find('[name="repassword"]').val()
+        password: hex_sha1($registerBox.find('[name="password"]').val()),
+        repassword: hex_sha1($registerBox.find('[name="repassword"]').val())
       }),
       contentType: 'application/json',
       dataType: 'json',
@@ -97,7 +96,7 @@ $(function () {
         }
         
         if (!result.code) {
-          // 注册成功 code = 0 success
+          // code = 0 success
           $('#reg-success').html(result.message).fadeIn(500).delay(1000).fadeOut(500);
           $('#logincenterTitle').html('Login')
           setTimeout(function () {
@@ -111,16 +110,14 @@ $(function () {
     })
   })
 
-    //登录
+    //login
     $('#Login-button').find('button').on('click', function () {
-    // $loginBox.find('button').on('click', function() {
-        //通过ajax提交请求
         $.ajax({
             type: 'post',
             url: '/api/user/login',
             data: {
                 username: $loginBox.find('[name="username"]').val(),
-                password: $loginBox.find('[name="password"]').val()
+                password: hex_sha1($loginBox.find('[name="password"]').val())
             },
             dataType: 'json',
             success: function(result) {
@@ -129,7 +126,6 @@ $(function () {
               }
 
                 if (!result.code) {
-                    //登录成功
                     $('#login-success').html(result.message).fadeIn(500);
                     setTimeout(function () {
                       window.location.reload();
@@ -139,29 +135,7 @@ $(function () {
         })
     })
 
-  // // add category
-  // $('#add-category').find('button').on('click', function () {
-  //   $.ajax({
-  //     type: 'post',
-  //     url: '/admin/category',
-  //     data: JSON.stringify({
-  //       username: $loginBox.find('[name="username"]').val(),
-  //       password: $loginBox.find('[name="password"]').val()
-  //     }),
-  //     contentType: 'application/json',
-  //     dataType: 'json',
-  //     success: function (result) {
-  //       $loginBox.find('.colWarning').html(result.message)
-
-  //       if (!result.code) {
-  //         // 登录成功
-  //         // window.location.reload()
-  //       }
-  //     }
-  //   })
-  // })
-
-  // 退出
+  // logout
   $('#logout, #logout-small').on('click', function () {
     console.log("Click logout");
     $.ajax({
@@ -193,3 +167,54 @@ function userlogout(){
   
 
 }
+
+$(function () {
+  currentpage = $('#admin-post-nav-current').attr('current') || -1
+  totalpage = $('#admin-post-nav-current').attr('total') || -2
+  if(currentpage == 1){
+    $('#admin-post-nav-pre').addClass('disabled')
+  }
+  if(currentpage === totalpage){
+    $('#admin-post-nav-next').addClass('disabled')
+  }
+})
+
+;(function($){
+  // from:
+  // https://codepen.io/patrickkahl/pen/DxmfG
+  
+  /**
+   * jQuery function to prevent default anchor event and take the href * and the title to make a share popup
+   *
+   * @param  {[object]} e           [Mouse event]
+   * @param  {[integer]} intWidth   [Popup width defalut 500]
+   * @param  {[integer]} intHeight  [Popup height defalut 400]
+   * @param  {[boolean]} blnResize  [Is popup resizeabel default true]
+   */
+  $.fn.customerPopup = function (e, intWidth, intHeight, blnResize) {
+    
+    // Prevent default anchor event
+    e.preventDefault();
+    
+    // Set values for window
+    intWidth = intWidth || '500';
+    intHeight = intHeight || '400';
+    strResize = (blnResize ? 'yes' : 'no');
+
+    // Set title and open popup with focus on it
+    var strTitle = ((typeof this.attr('title') !== 'undefined') ? this.attr('title') : 'Social Share'),
+        strParam = 'width=' + intWidth + ',height=' + intHeight + ',resizable=' + strResize,            
+        objWindow = window.open(this.attr('href'), strTitle, strParam).focus();
+  }
+  
+  /* ================================================== */
+  
+  $(document).ready(function ($) {
+    $('.facebook.customer.share').attr('href',"https://www.facebook.com/sharer.php?u="+ window.location.href);
+    $('.customer.share').on("click", function(e) {
+      $(this).customerPopup(e);
+    });
+
+  });
+    
+}(jQuery));

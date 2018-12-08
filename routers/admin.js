@@ -228,7 +228,7 @@ router.put('/category', function(req, res) {
                 res.json(responseData) 
                 return
         } else {
-            return Category.update({
+            return Category.updateOne({
                 _id: id
             }, {
                 name: name,
@@ -437,7 +437,7 @@ router.put('/post/:id', function(req, res) {
         return
     }
 
-    Content.update({
+    Content.updateOne({
         _id: id
     }, {
         category: req.body.category,

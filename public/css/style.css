@@ -49,6 +49,10 @@ a:link, a:visited{
     margin:40px 30px 0 30px;
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}
+
 .nav-link{
     cursor: pointer;
 }

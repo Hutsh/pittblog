@@ -28,7 +28,6 @@ router.use(function(req, res, next) {
         categories: []
     }
 
-    //todo zhe li shi wei le dao hang lan de categories, keyi shanchu?
     Category.find().then(function(categories) {
         data.categories = categories;
         next();
@@ -112,7 +111,6 @@ router.get('/archive', function(req, res) {
             } else {
                 monthPost.posts.push(posts[i])
             }
-
         }
 
         return postsByMonth
@@ -124,18 +122,8 @@ router.get('/archive', function(req, res) {
         }
         data.postByMonth = postsByMonth
         res.render('main/archive', data);
-
     })
 
-})
-
-
-//working
-router.get('/category', function(req, res) {
-    Category.find().then(function(categories) {
-        data.categories = categories;
-        res.render('main/categories', data);
-    });
 })
 
 // upload file
@@ -152,6 +140,30 @@ router.post('/upload', upload.single('file'), function(req, res, next){
 router.get('/upload', function(req, res, next){
     res.render('main/upload', data);
 });
+
+//category list
+router.get('/category', function(req, res) {
+    Category.find().then(function(categories) {
+        data.categories = categories;
+        res.render('main/categories', data);
+    });
+})
+
+//category
+router.get('/category/:category', function(req, res) {
+    console.log("loading category:"+req.params.category);
+    Content.where('category').eq(req.params.category).populate(['user']).sort({ 
+        addTime: -1 
+    }).then(function(posts){
+        data.contents = posts;
+        data.showcat = req.params.category;
+        console.log(posts);
+        res.render('main/index', data);
+    })
+    
+
+
+})
 
 
 module.exports = router

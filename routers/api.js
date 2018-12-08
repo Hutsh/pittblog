@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 var User = require('../models/User')
 var Content = require('../models/Content');
+var sha1 = require('sha1')
 
 var responseData
 
@@ -51,7 +52,7 @@ router.post('/user/register', function (req, res, next) {
       return
     }
     var user = new User({
-      username: username, // todo: add sha1
+      username: username, 
       password: password
     })
     return user.save()

@@ -68,12 +68,15 @@ function renderComment() {
 
     if (comments.length == 0) {
         $('.messageList').html('<div class="messageBox"><h4>Be the first one to leave comment!</h4></div>');
+        $('.pager').hide()
     } else {
+        $('.pager').show()
         var html = '';
         for (var i=start; i<end; i++) {
             html += '<div class="messageBox">'+
                 '<p class="commnet-info"><span class="commnet-user">'+comments[i].username+'</span><i>&nbsp;@&nbsp;</i><span class="commnet-time">'+ formatDate(comments[i].postTime) +'</span></p><p class="commnet-content">'+comments[i].content+'</p>'+
                 '</div>';
+            console.log(comments[i].postTime);
         }
         $('.messageList').html(html);
     }
@@ -85,7 +88,7 @@ function formatDate(d) {
 
     var date1 = new Date(d);
 
-    var houroffert = 1
+    var houroffert = 9
 
     date = date1.getDate(); date = ("0"+date).substr(-2);
     hour = date1.getHours(); hour = (hour+houroffert)%24; hour = ("0"+hour).substr(-2);
