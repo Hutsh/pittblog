@@ -1,5 +1,20 @@
 // from assignment 2
 $(function () {
+
+  // var homereg = new RegExp("/page/?\d?")
+  // var archivereg = new RegExp("/archive/?\d?")
+
+  // pathname = window.location.pathname;
+
+  // if(homereg.test(pathname) || pathname=="/"){
+  //   $('.indicator-item').slice(0,1).removeClass("nav-inactive")
+  //   $('.indicator-item').slice(0,1).addClass("nav-active")
+  // }
+  // if(archivereg.test(pathname)){
+  //   $('.indicator-item').slice(1,2).removeClass("nav-inactive")
+  //   $('.indicator-item').slice(1,2).addClass("nav-active")
+  // }
+
   if ( $( "#nav-indicator-track" ).length ) { //indicator exist
       console.log("top nav exist");
       active_tab = $("a.nav-active");

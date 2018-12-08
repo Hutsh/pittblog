@@ -1,0 +1,38 @@
+<nav class="right-nav d-none d-md-block text-nowrap">
+    <a class="nav-item indicator-item nav-inactive" href="/">HOME</a>
+    <a class="nav-item indicator-item nav-active" id="nav-active" href="/archive">Archive</a>
+    <a class="nav-item indicator-item nav-inactive" href="categories.html">Categories</a>
+    <a class="nav-item indicator-item nav-inactive" href="about.html">ABOUT</a>
+    <div class="login-info " >
+        <!-- this part is shown when user is logined -->
+        {% if userInfo._id %}
+            {% if userInfo.isAdmin %}
+                <div class="dropdown dropdown-pointer">
+                    <a class="dropdown-toggle" id="dropdownMenuAdmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Hi, Admin
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuAdmin">
+                        <a class="dropdown-item colDark" href="/admin">Go Admin Page</a>
+                        <a class="dropdown-item colDark" href="javascript:;" id="logout">Logout</a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="dropdown dropdown-pointer">
+                    <a class="dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Hi, {{userInfo.username}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+<!--                         <button class="dropdown-item colDark" type="button"><a href="javascript:;" id="logout">Logout</a></button> -->
+                    <a class="dropdown-item colDark" href="javascript:;" id="logout">Logout</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+            <a class="indicator-item" data-toggle="modal" data-target="#logincenter">Login</a>
+        {% endif %}
+        <!-- login and signup model end here -->
+        <!-- this part is shown when user is logined -->
+    </div>
+    <div id="nav-indicator-track"></div>
+    <div id="nav-indicator"></div>
+</nav>

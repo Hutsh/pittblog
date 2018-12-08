@@ -47,7 +47,7 @@ router.get('/user', function(req, res) {
         var skip = (page - 1) * limit;
 
         User.find().limit(limit).skip(skip).then(function(users) {
-            res.render('admin/user_index', {
+            res.render('admin/admin_user', {
                 userInfo: req.userInfo,
                 users: users,
 
@@ -78,7 +78,7 @@ router.get('/category', function(req, res) {
         var skip = (page - 1) * limit;
 
         Category.find().sort({_id: -1}).limit(limit).skip(skip).then(function(categories) {
-            res.render('admin/category_index', {
+            res.render('admin/admin_category', {
                 userInfo: req.userInfo,
                 categories: categories,
 
@@ -95,12 +95,12 @@ router.get('/category', function(req, res) {
 
 
 // add cat page
-router.get('/category/add', function(req, res) {
-    console.log(req.body);
-    res.render('admin/category_add', {
-        userInfo: req.userInfo
-    });
-});
+// router.get('/category/add', function(req, res) {
+//     console.log(req.body);
+//     res.render('admin/category_add', {
+//         userInfo: req.userInfo
+//     });
+// });
 
 
 
@@ -145,24 +145,24 @@ router.post('/category', function(req, res) {
 
 // edit cat page
 // /post/edit/:id
-router.get('/category/edit/:id', function(req, res) {
+// router.get('/category/edit/:id', function(req, res) {
 
-    var id = req.params.id || '';
+//     var id = req.params.id || '';
 
-    Category.findOne({
-        _id: id
-    }).then(function(category) {
-        if (!category) {
-            res.send('category not exist')
-        } else {
-            res.render('admin/category_edit', {
-                userInfo: req.userInfo,
-                category: category
-            });
-        }
-    })
+//     Category.findOne({
+//         _id: id
+//     }).then(function(category) {
+//         if (!category) {
+//             res.send('category not exist')
+//         } else {
+//             res.render('admin/category_edit', {
+//                 userInfo: req.userInfo,
+//                 category: category
+//             });
+//         }
+//     })
 
-});
+// });
 
 // save cat change
 router.put('/category', function(req, res) {
@@ -180,20 +180,6 @@ router.put('/category', function(req, res) {
       res.json(responseData)
       return
     }
-
-    // // name exist
-    // Category.findOne({
-    //   name: newname
-    // }).then(function(samename){
-    //     console.log('find same name?');
-    //     console.log(samename);
-    //   if(samename){ // exist samename
-    //     responseData.code = 2
-    //     responseData.message = 'name exist'
-    //     res.json(responseData)
-    //     return
-    //   }
-    // })
 
     //update
     Category.findOne({
@@ -359,7 +345,8 @@ router.post('/post', function(req, res) {
         title: req.body.title,
         user: req.userInfo._id.toString(),
         description: req.body.description,
-        content: req.body.content
+        content: req.body.content,
+        addTime: new Date(),
     }).save().then(function(rs) {
       responseData.code = 0
       responseData.message = 'Success'

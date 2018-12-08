@@ -24,10 +24,10 @@
                 </button>
                 <div class="collapse navbar-collapse small-nav" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="archive.html">Archive</a>
                         </li>
                         <li class="nav-item">
@@ -85,7 +85,7 @@
                 <div class="col-md-8 col-lg-9 right-container">
                     <div class="right-content">
 
-                        {% include "user_nav_home.html" %}
+                        {% include "user_nav_archive.html" %}
                         
                         <!-- login and signup Modal -->
                         <div class="modal fade" id="logincenter" tabindex="-1" role="dialog" aria-labelledby="logincenterTitle" aria-hidden="true">
@@ -148,7 +148,6 @@
                             </div>
                         </div>
                         <div class="posts-container" >
-                            {% include "postcontent.html" %}
 
 
 

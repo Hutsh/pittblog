@@ -29,6 +29,7 @@ $(function () {
         console.log(result);
         if(result.code == 0){
           console.log('success');
+          $('#addPostInfoModel').modal('show');
           $('#success-info').show()
           $('#success-info').html('Success! ')
         }else{

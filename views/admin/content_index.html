@@ -4,7 +4,7 @@
 
 {% include "admin_nav.html" %}
 
-<h3>Posts<p>total:{{count}}</p></h3>
+<h3>Posts, total:{{count}}</h3>
 
 
 
@@ -33,11 +33,11 @@
         <td>{{content.category}}</td>
         <td style="word-break: break-all;">{{content.title}}</td>
         <td>{{content.user.username}}</td>
-        <td>{{content.addTime|date('Y,M d H:i:s', 5*60-60)}}</td>
+        <td>{{content.addTime|date('Y,M d H:i:s', 6*60-60)}}</td>
         <td>{{content.views}}</td>
         <td>
-
-            <button type="button" class="btn btn-outline-primary btn-sm"><a href="/admin/post/edit/{{content._id.toString()}}">EDIT</a></button>
+            <a class="btn btn-outline-secondary btn-sm" href="/post/{{content._id.toString()}}">VIEW</a>
+            <a class="btn btn-outline-primary btn-sm" href="/admin/post/edit/{{content._id.toString()}}">EDIT</a>
             <button type="button" onclick="delpost(this);" name="{{content._id.toString()}}" class="btn btn-outline-danger btn-sm">DEL</button>
         </td>
     </tr>

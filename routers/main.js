@@ -77,6 +77,12 @@ router.get('/post/:id', function (req, res){
 
 });
 
+router.get('/archive', function(req, res){
+
+
+    res.render('main/archive', data);
+})
+
 
 
 

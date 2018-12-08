@@ -264,3 +264,7 @@ a:link, a:visited{
     }
 
 }
+
+.dropdown-pointer{
+    cursor: pointer;
+}
