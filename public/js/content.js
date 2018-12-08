@@ -4,7 +4,7 @@
 $(function () {
   // add content
   $('#content-add-btn').on('click', function () {
-    // 通过ajax提交请求
+    // get raw markdown from editor
     
     // $('#html_container').wrapInner(simplemde.options.previewRender(simplemde.value()));
     
@@ -15,7 +15,7 @@ $(function () {
 
     $.ajax({
       type: 'post',
-      url: '/admin/content/add', // wait fix: /:username/content
+      url: '/admin/post',
       data: JSON.stringify({
         title: $('#title').val(),
         category: $( "#category option:selected" ).text(),
@@ -68,39 +68,6 @@ $(function () {
     })
   })
 
-
-  // edit category
-  $('#edit-category').find('button').on('click', function () {
-    // 通过ajax提交请求
-
-    $.ajax({
-      type: 'put',
-      url: '/admin/category/edit',
-
-      data: JSON.stringify({
-        name: $('#name-input').val(),
-        id: $('#id-input').val(),
-      }),
-      contentType: 'application/json',
-      dataType: 'json',
-      success: function (result) {
-        console.log(result);
-        if(result.code){ // error
-          console.log(result);
-          $('#submitwarning').show()
-          $('#submitwarning').html(result.message)
-          setTimeout(function () {
-              $('#submitwarning').hide()
-          }, 1000)
-        } else{ // success
-          $('#submitsuccess').show()
-          window.location.reload()
-        }
-
-        
-      }
-    })
-  })
 
 })
 

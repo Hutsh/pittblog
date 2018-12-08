@@ -3,11 +3,11 @@ var page = 1;
 var pages = 0;
 var comments = [];
 
-//提交评论
+//submit commnet
 $('#messageBtn').on('click', function() {
     $.ajax({
         type: 'POST',
-        url: '/api/comment/post',
+        url: '/api/comment',
         data: {
             contentid: $('#contentId').val(),
             content: $('#messageContent').val()

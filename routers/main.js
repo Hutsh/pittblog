@@ -21,9 +21,7 @@ router.use(function (req, res, next) {
     });
 });
 
-/*
-* 首页
-* */
+
 router.get('(/page/)?:page?', function(req, res, next) {
 
     data.category = req.query.category || '';
@@ -40,11 +38,8 @@ router.get('(/page/)?:page?', function(req, res, next) {
     Content.where(where).count().then(function(count) {
 
         data.count = count;
-        //计算总页数
         data.pages = Math.ceil(data.count / data.limit);
-        //取值不能超过pages
         data.page = Math.min( data.page, data.pages );
-        //取值不能小于1
         data.page = Math.max( data.page, 1 );
 
         var skip = (data.page - 1) * data.limit;
@@ -59,24 +54,6 @@ router.get('(/page/)?:page?', function(req, res, next) {
         res.render('main/index', data);
     })
 });
-
-//replaced by router.get('/post/:id',
-// router.get('/view', function (req, res){
-
-//     var contentId = req.query.contentid || '';
-
-//     Content.findOne({
-//         _id: contentId
-//     }).then(function (content) {
-//         data.content = content;
-
-//         content.views++;
-//         content.save();
-
-//         res.render('main/view', data);
-//     });
-
-// });
 
 
 //mod for router.get('/view', chage /view to /post and RESTFUL
