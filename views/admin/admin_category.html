@@ -13,6 +13,7 @@
     <tr>
         <th>ID</th>
         <th>Category</th>
+        <th>Image</th>
         <th>Action</th>
     </tr>
 
@@ -20,9 +21,12 @@
     <tr>
         <td>{{category._id.toString()}}</td>
         <td>{{category.name}}</td>
+        <th><a class="btn btn-outline-primary btn-sm" rel="popover" data-img="{{category.imgPath}}">Show</a></th>
+        
+        <!-- <th>{{category.imgPath}}</th> -->
         <td>
 <!--             <button type="button" class="btn btn-outline-primary btn-sm"><a href="/admin/category/edit/{{category._id.toString()}}">EDIT</a></button> -->
-            <button type="button" onclick="catEditPopup(this)" class="btn btn-outline-primary btn-sm" name="{{category._id.toString()}}" value="{{category.name}}">EDIT</button>
+            <button type="button" onclick="catEditPopup(this)" class="btn btn-outline-primary btn-sm" name="{{category._id.toString()}}" value="{{category.name}}" imgPath="{{category.imgPath}}">EDIT</button>
             <button type="button" onclick="delcat(this);" name="{{category._id.toString()}}" class="btn btn-outline-danger btn-sm">DEL</button>
         </td>
     </tr>
@@ -48,6 +52,10 @@
           <div class="form-group">
             <label for="new-cat-name" class="col-form-label">New Category Name:</label>
             <input type="text" class="form-control" id="new-cat-name">
+          </div>
+          <div class="form-group">
+            <label for="new-cat-img" class="col-form-label">Category Image Path:</label>
+            <input type="text" class="form-control" id="new-cat-img">
           </div>
         </form>
         <div id="submitsuccess" class="alert alert-success" style="display:none;" role="alert">Success</div>

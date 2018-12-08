@@ -202,11 +202,13 @@ function delpost(btn){
 function catEditPopup(btn){
   id = btn.name;
   oldname = btn.value;
-  // console.log('wait del id:'+odlname);
+  oldImgPath = btn.getAttribute("imgPath");
+  // console.log('wait del id:'+btn.getAttribute("imgPath"));
   $('#catEditModel').modal('show');
   $('#catEditModelTitle').text('Edit Category: '+oldname)
   $('#catEditModelId').text('ID: '+id)
   $('#new-cat-name').val(oldname)
+  $('#new-cat-img').val(oldImgPath)
   $('#catEditModelCatId').val(id)
 
 }
@@ -220,6 +222,7 @@ $('#catEditModelComfirm').on('click', function () {
         url: '/admin/category',
         data: JSON.stringify({
           name: $('#new-cat-name').val(),
+          imgPath: $('#new-cat-img').val()
         }),
         contentType: 'application/json',
         dataType: 'json',
@@ -246,10 +249,10 @@ $('#catEditModelComfirm').on('click', function () {
       $.ajax({
         type: 'put',
         url: '/admin/category',
-
         data: JSON.stringify({
           name: $('#new-cat-name').val(),
           id: $('#catEditModelCatId').val(),
+          imgPath: $('#new-cat-img').val(),
         }),
         contentType: 'application/json',
         dataType: 'json',
@@ -282,6 +285,14 @@ $(function(){
     $('#catEditModel').modal('show');
     $('#catEditModelId').text('')
     $('#new-cat-name').val('')
+    $('#new-cat-img').val('')
   })
 
 })
+
+$('a[rel=popover]').popover({
+  html: true,
+  trigger: 'hover',
+  placement: 'bottom',
+  content: function(){return '<img src="'+$(this).data('img') + '" height="200" width="200"/>';}
+});

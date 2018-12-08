@@ -111,10 +111,18 @@ router.post('/category', function(req, res) {
     console.log(req.body);
 
     var name = req.body.name || '';
+    var imgPath = req.body.imgPath || '';
 
     if (name == '') {
         responseData.code = 1
         responseData.message = 'Category name can not be empty'
+        res.json(responseData)
+        return
+    }
+
+    if (imgPath == '') {
+        responseData.code = 1
+        responseData.message = 'Category Image can not be empty'
         res.json(responseData)
         return
     }
@@ -131,7 +139,8 @@ router.post('/category', function(req, res) {
         } else {
             // save cat
             return new Category({
-                name: name
+                name: name,
+                imgPath: imgPath
             }).save();
         }
     }).then(function(newCategory) {
@@ -169,6 +178,7 @@ router.put('/category', function(req, res) {
 
     var id = req.body.id || ''; //oldid
     var name = req.body.name || ''; //newname
+    var imgPath = req.body.imgPath || '';
     // console.log('run here');
 
     console.log('submitted id='+id+' ; newname='+name);
@@ -179,6 +189,13 @@ router.put('/category', function(req, res) {
       responseData.message = 'Empty name'
       res.json(responseData)
       return
+    }
+
+    if (imgPath == '') {
+        responseData.code = 1
+        responseData.message = 'Category Image can not be empty'
+        res.json(responseData)
+        return
     }
 
     //update
@@ -199,7 +216,8 @@ router.put('/category', function(req, res) {
             } else {
                 return Category.findOne({
                     _id: {$ne: id},
-                    name: name
+                    name: name,
+                    imgPath: imgPath
                 });
             }
         }
@@ -213,7 +231,8 @@ router.put('/category', function(req, res) {
             return Category.update({
                 _id: id
             }, {
-                name: name
+                name: name,
+                imgPath: imgPath
             });
         }
     }).then(function() {
