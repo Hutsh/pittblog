@@ -209,14 +209,16 @@ function catEditPopup(btn){
   $('#catEditModelId').text('ID: '+id)
   $('#new-cat-name').val(oldname)
   $('#new-cat-img').val(oldImgPath)
+  $("#imagePreview").attr("src",oldImgPath).show()
   $('#catEditModelCatId').val(id)
 
 }
 
 
-$('#catEditModelComfirm').on('click', function () {
+$('#catEditModelConfirm').on('click', function () {
     if($('#catEditModelTitle').text() == 'Add New Category'){
       //New
+      $("#imagePreview").attr("src",'').hide()
       $.ajax({
         type: 'post',
         url: '/admin/category',
@@ -296,3 +298,34 @@ $('a[rel=popover]').popover({
   placement: 'bottom',
   content: function(){return '<img src="'+$(this).data('img') + '" height="200" width="200"/>';}
 });
+
+$('#catImageUpload').on('change',function(e){
+    //get the file name
+    var fileName = $(this).val().replace('C:\\fakepath\\','');
+    //replace the "Choose a file" label
+    $(this).next('.custom-file-label').html(fileName);
+    $('#btn-catImgSubmit').removeClass('disabled')
+})
+
+
+// $('#imgUploadForm').submit(function(e){
+//   e.preventDefault();
+//   console.log('submitting upload');
+// })
+
+
+$('#btn-catImgSubmit').on('click', function(){
+  $('#catImgUploadForm').ajaxSubmit({
+        url: '/upload', 
+        type: 'post',
+        success: function(respond){
+          filePath = "/public/upload/" + respond.uploadedFile
+          console.log("uploaded:" + filePath);
+          $("#imagePreview").attr("src",filePath).show();
+          $('#new-cat-img').val(filePath)
+        },
+        error: function(){
+          console.log('uploaded error');
+        }
+      })
+})

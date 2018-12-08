@@ -1,3 +1,4 @@
+var fs = require('fs');
 var express = require('express');
 var router = express.Router();
 
@@ -5,6 +6,19 @@ var Category = require('../models/Category');
 var Content = require('../models/Content');
 var User = require('../models/User')
 
+var multer  = require('multer')
+var upload = multer({ dest: 'public/upload/' });
+
+
+var responseData
+
+router.use(function (req, res, next) {
+  responseData = {
+    code: 0,
+    message: ''
+  }
+  next()
+})
 
 
 var data;
@@ -115,15 +129,29 @@ router.get('/archive', function(req, res) {
 
 })
 
+
+//working
 router.get('/category', function(req, res) {
     Category.find().then(function(categories) {
         data.categories = categories;
         res.render('main/categories', data);
     });
-
-    
 })
 
+// upload file
+router.post('/upload', upload.single('file'), function(req, res, next){
+    uploaded = req.file.filename
+    console.log('uploaded:', uploaded);
+    responseData.code = 0
+    responseData.message = 'Updated'
+    responseData.uploadedFile = uploaded
+    res.json(responseData)
+    return
+});
+
+router.get('/upload', function(req, res, next){
+    res.render('main/upload', data);
+});
 
 
 module.exports = router

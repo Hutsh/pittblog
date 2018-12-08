@@ -1,12 +1,14 @@
-// load
+var fs = require('fs');
 var path = require('path')
 var express = require('express')
 var swig = require('swig')
 var mongoose = require('mongoose')
 var bodyParser = require('body-parser')
 var Cookies = require('cookies')
+var multer  = require('multer')
 
 var app = express()
+
 
 var User = require('./models/User')
 

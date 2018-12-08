@@ -54,17 +54,42 @@
             <input type="text" class="form-control" id="new-cat-name">
           </div>
           <div class="form-group">
-            <label for="new-cat-img" class="col-form-label">Category Image Path:</label>
+            <label for="new-cat-img" class="col-form-label">Category Image:</label>
             <input type="text" class="form-control" id="new-cat-img">
           </div>
         </form>
+
+        <form id="catImgUploadForm" action="/upload" method="post" enctype="multipart/form-data">
+        <div class="input-group">
+          <div class="custom-file">
+            <input type="file" name="file" class="custom-file-input" id="catImageUpload" aria-describedby="inputGroupFileAddon04">
+            <label class="custom-file-label" for="catImageUpload">Choose file</label>
+          </div>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary disabled" type="button" id="btn-catImgSubmit">Upload</button>
+          </div>
+        </div>
+        </form>
+        <img src="" alt="upload_image" id="imagePreview" class="img-thumbnail" style="display: none">
+
+
+
+<!--         <form id="catImgUploadForm" action="/upload" method="post" enctype="multipart/form-data">
+            <h2>upload file</h2>
+            <input type="file" name="file">
+            <input type="submit" value="submit">
+        </form>
+
+        <button id='btn-catImgSubmit'>submit2</button> -->
+
+
         <div id="submitsuccess" class="alert alert-success" style="display:none;" role="alert">Success</div>
         <div id="submitwarning" class="alert alert-danger" style="display:none;" role="alert"></div>
       </div>
       <input type="hidden" class="form-control" id="catEditModelCatId">
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="catEditModelComfirm" class="btn btn-primary">Comfirm Edit</button>
+        <button type="button" id="catEditModelConfirm" class="btn btn-primary">Confirm</button>
       </div>
     </div>
   </div>
