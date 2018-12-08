@@ -21,7 +21,7 @@ $('#messageBtn').on('click', function() {
     })
 });
 
-//每次页面重载的时候获取一下该文章的所有评论
+// load commnets
 $.ajax({
     url: '/api/comment',
     data: {
