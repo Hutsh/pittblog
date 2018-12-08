@@ -167,43 +167,86 @@ router.get('/category/edit/:id', function(req, res) {
 // save cat change
 router.put('/category', function(req, res) {
 
-    var oldid = req.body.id || ''; //oldid
-    var newname = req.body.name || ''; //newname
+    var id = req.body.id || ''; //oldid
+    var name = req.body.name || ''; //newname
     // console.log('run here');
 
-    console.log('submitted id='+oldid+' ; newname='+newname);
+    console.log('submitted id='+id+' ; newname='+name);
 
       // empty name
-    if(newname === ''){
+    if(name === ''){
       responseData.code = 1
       responseData.message = 'Empty name'
       res.json(responseData)
       return
     }
 
-    // name exist
-    Category.findOne({
-      name: newname
-    }).then(function(samename){
-      if(samename){ // exist samename
-        responseData.code = 2
-        responseData.message = 'name exist'
-        res.json(responseData)
-        return
-      }
-    })
+    // // name exist
+    // Category.findOne({
+    //   name: newname
+    // }).then(function(samename){
+    //     console.log('find same name?');
+    //     console.log(samename);
+    //   if(samename){ // exist samename
+    //     responseData.code = 2
+    //     responseData.message = 'name exist'
+    //     res.json(responseData)
+    //     return
+    //   }
+    // })
 
     //update
     Category.findOne({
-      _id: oldid
-    }, function (err, findcat){
-      findcat.name = newname;
-      findcat.save();
-      responseData.code = 0
-      responseData.message = 'Success'
-      res.json(responseData)
-      return
-    });
+        _id: id
+    }).then(function(category) {
+        if (!category) {
+           responseData.code = 4
+           responseData.message = 'Category does not exist'
+           res.json(responseData) 
+           return
+        } else {
+            if (name == category.name) {
+                responseData.code = 0
+                responseData.message = 'Category did not change.'
+                res.json(responseData) 
+                return
+            } else {
+                return Category.findOne({
+                    _id: {$ne: id},
+                    name: name
+                });
+            }
+        }
+    }).then(function(sameCategory) {
+        if (sameCategory) {
+                responseData.code = 1
+                responseData.message = 'Category name already exist'
+                res.json(responseData) 
+                return
+        } else {
+            return Category.update({
+                _id: id
+            }, {
+                name: name
+            });
+        }
+    }).then(function() {
+        responseData.code = 0
+        responseData.message = 'Success'
+        res.json(responseData) 
+        return
+    })
+
+
+    // if(!isExist){
+    //    console.log('zou zhe le');
+    //    findcat.name = newname;
+    //    findcat.save();
+    //    responseData.code = 0
+    //    responseData.message = 'Success'
+    //    res.json(responseData) 
+    //    return
+    // }
 
 });
 

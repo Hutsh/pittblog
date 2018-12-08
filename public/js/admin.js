@@ -26,8 +26,6 @@ $(function () {
               $('#submitsuccess').hide()
           }, 1000)
         }
-
-        
       }
     })
   })
@@ -35,7 +33,6 @@ $(function () {
 
   // edit category
 $('#edit-category').find('button').on('click', function () {
-    // 通过ajax提交请求
 
     $.ajax({
       type: 'put',
@@ -200,3 +197,91 @@ function delpost(btn){
   })
 
 }
+
+
+function catEditPopup(btn){
+  id = btn.name;
+  oldname = btn.value;
+  // console.log('wait del id:'+odlname);
+  $('#catEditModel').modal('show');
+  $('#catEditModelTitle').text('Edit Category: '+oldname)
+  $('#catEditModelId').text('ID: '+id)
+  $('#new-cat-name').val(oldname)
+  $('#catEditModelCatId').val(id)
+
+}
+
+
+$('#catEditModelComfirm').on('click', function () {
+    if($('#catEditModelTitle').text() == 'Add New Category'){
+      //New
+      $.ajax({
+        type: 'post',
+        url: '/admin/category',
+        data: JSON.stringify({
+          name: $('#new-cat-name').val(),
+        }),
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function (result) {
+          if(result.code){ // error
+            console.log(result);
+            $('#submitwarning').show()
+            $('#submitwarning').html(result.message)
+            setTimeout(function () {
+                $('#submitwarning').hide()
+            }, 1000)
+          } else{ // success
+            $('#submitsuccess').show()
+            setTimeout(function () {
+                window.location.reload()
+            }, 1000)
+          }
+        }
+      })
+
+
+    }else{
+      // Update
+      $.ajax({
+        type: 'put',
+        url: '/admin/category',
+
+        data: JSON.stringify({
+          name: $('#new-cat-name').val(),
+          id: $('#catEditModelCatId').val(),
+        }),
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function (result) {
+          console.log(result);
+          if(result.code){ // error
+            console.log(result);
+            $('#submitwarning').show()
+            $('#submitwarning').html(result.message)
+            setTimeout(function () {
+                $('#submitwarning').hide()
+            }, 1000)
+          } else{ // success
+            $('#submitsuccess').show()
+            setTimeout(function () {
+                window.location.reload()
+            }, 500)
+          }
+        }
+      })
+    }
+
+
+  })
+
+
+$(function(){
+  $('#btnAddNewCat').on('click', function () {
+    $('#catEditModelTitle').text('Add New Category')
+    $('#catEditModel').modal('show');
+    $('#catEditModelId').text('')
+    $('#new-cat-name').val('')
+  })
+
+})

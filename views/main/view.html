@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Huts's Blog</title>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		
+		<link href="/public/css/poststyle.css" rel="stylesheet">
+		<link href="/public/css/hue.css" rel="stylesheet">
+		<!-- todo: del jq 1.12 -->
+		<!-- <script src="/public/js/jquery-1.12.4.min.js"></script> -->
+		
+	</head>
+	<body>
+		<div class="container-panel"><!--整个页面-->
+		<header class="post-header">
+			<div class="menu-trigger menu-trigger-tri">
+				<i class="fas fa-align-right"></i>
+			</div>
+		</header>
+		<main class="post-content-warp">
+			<div class="post-info">
+				<i class="far fa-clock"></i>
+				<p>Time:</p>
+				<p>{{content.addTime|date('Y M d, H:i', 5*60)}}</p>
+				<p>·</p>
+				<i class="far fa-bookmark"></i>
+				<p>Category: </p>
+				<a href="">{{content.category}}</a>
+				<p class="post-info-inline">·&nbsp;</p>
+				<i class="far fa-eye post-info-inline"></i>
+				<p class="post-info-inline">Views: </p>
+				<a class="post-info-inline">{{content.views}}</a>
+				<p class="post-info-inline">·&nbsp;</p>
+				<i class="far fa-comment-dots post-info-inline"></i>
+				<p class="post-info-inline">Comments: </p>
+				<a class="post-info-inline">{{content.comments.length}}</a>
+			</div>
+			<h1>{{content.title}}</h1>
+			<p class="post-detail">
+				{{content.content}}
+			</p>
+			<hr class="md-5">
+			<div class="post-comment-wrap mt-5">
+				<div class="listBox message">
+					<h5 class="textLeft">Commnets:</h5>
+					<input type="hidden" id="contentId" value="{{content.id}}">
+					{% if userInfo._id %}
+						<div class="input-group mb-3">
+							<textarea class="form-control" id="messageContent" rows="3"></textarea>
+							<div class="input-group-append">
+								<button class="btn btn-secondary submit" type="button" id="messageBtn">Submit</button>
+							</div>
+						</div>
+						<!--            	    <p class="textLeft">zmouse</p>
+						<p class="textLeft clear">
+							<textarea id="messageContent"></textarea>
+							<input type="hidden" id="contentId" value="{{content.id}}">
+							<button id="messageBtn" class="submit">提交</button>
+						</p> -->
+						{%else%}
+						<div class="alert alert-secondary alert-dismissible fade show" role="alert">
+							Please <a href="#" class="alert-link" data-toggle="modal" data-target="#logincenter">Login</a> before leaving a commnet.
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						{%endif%}
+						<div class="messageList">
+						</div>
+						<div class="pager">
+							<ul class="clear">
+								<li class="previous">
+									<a href=""><<</a>
+								</li>
+								<li></li>
+								<li class="next">
+									<a href="">>></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</main>
+			<footer class="post-footer">
+				<div class="post-footer-info">
+					<div class="row">
+						<div class="col-xs-12 col-sm-2">
+							<img src="/public/images/pittlogo_dark.png" class="user-icon " alt="user-image">
+						</div>
+						<div class="col-xs-12 col-sm-6">
+							<div class="category-list">
+								<p>Published in <span>{{content.addTime|date('d M Y')}}</span></p>
+								<p>By <a href="#">{{content.user.username}}</a> in category <a href="#">{{content.category}}</a></p>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-4">
+							<div class="social">
+								<p>Share this article
+								</p><div class="social-links">
+								<a class="social-icon" href="#" data-platform="twitter" data-message="Message about this post" data-url="http://writertheme.com/post"><i class="fab fa-twitter"></i></a>
+								<a class="social-icon" href="#" data-platform="facebook" data-message="Message about this post" data-url="http://writertheme.com/post"><i class="fab fa-facebook-f"></i></a>
+								<a class="social-icon" data-platform="mail" href="mailto:hutsh@live.com"><i class="far fa-envelope-open"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-jump">
+			</div>
+		</footer>
+	</div>
+	<div id="side-menu" class="left-menu">
+		<div class="side-menu-title mt-5">
+			<h1>PittBlog</h1>
+		</div>
+		<ul class="side-menu-list mt-5">
+			<li>
+				<a href="/"><i class="fas fa-home"> &nbsp;</i>Home</a>
+			</li>
+			<li>
+				<a href="#"><i class="fas fa-archive"> &nbsp;</i>Archives</a>
+			</li>
+			<li>
+				<a href="#"><i class="fas fa-tags"> &nbsp;</i>Categories</a>
+			</li>
+			<br>
+			<li>
+
+				{% if userInfo._id %}
+				    {% if userInfo.isAdmin %}
+				        <div class="dropdown">
+				            <a class="dropdown-toggle" id="dropdownMenuAdmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				              Hi, Admin
+				            </a>
+				          <div class="dropdown-menu" aria-labelledby="dropdownMenuAdmin">
+				            <button class="dropdown-item colDark" type="button"><a href="/admin">Go Admin Page</a></button>
+				            <button class="dropdown-item btn-logout" type="button"><a onclick="userlogout()" id="logout">Logout</a></button>
+				          </div>
+				        </div>
+				    {% else %}
+				        <div class="dropdown">
+				            <a class="dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				              Hi, {{userInfo.username}}
+				            </a>
+				          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+				            <button class="dropdown-item colDark btn-logout" type="button"><a onclick="userlogout()" id="logout">Logout</a></button>
+				          </div>
+				        </div>
+				    {% endif %}
+				{% else %}
+				    <a id="side-menu-login" class="menu-trigger-tri" data-toggle="modal" data-target="#logincenter"><i class="fas fa-user-alt"> &nbsp;</i>Login</a>
+				{% endif %}
+
+
+				
+			</li>
+		</ul>
+	</div>
+
+	<!-- login and signup Modal -->
+	<div class="modal fade" id="logincenter" tabindex="-1" role="dialog" aria-labelledby="logincenterTitle" aria-hidden="true">
+	    <div class="modal-dialog modal-dialog-centered" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="logincenterTitle">Login</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                <!-- change here to switch login and register -->
+	                <div class="rightBox" id="loginBox">
+	                    <div class="form-group">
+	                        <label for="input-login-username">Username</label>
+	                        <input type="text" name="username" class="form-control" id="input-login-username" placeholder="Username">
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="input-login-password">Password</label>
+	                        <input type="password" name="password"  class="form-control" id="input-login-password" placeholder="Password">
+	                    </div>
+	                    <div class="alert alert-danger" role="alert" id="login-alert" style="display: none;">alert</div>
+	                    <div class="alert alert-success" role="alert" id="login-success" style="display: none;">Success</div>
+	                    <a href="javascript:;" class="colMint login-reg-switch" id="register-triger">Don't have an account? <i class="far fa-hand-point-right">&nbsp;</i>Register Now</a>
+	                </div>
+	                <!-- change here to switch login and register -->
+
+	                <!-- change here to switch login and register -->
+	                <div class="rightBox"  id="registerBox" style="display: none;">
+	                    <div class="form-group">
+	                        <label for="input-reg-username">Username</label>
+	                        <input type="text" name="username" class="form-control" id="input-reg-username" placeholder="Username">
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="input-reg-password">Password</label>
+	                        <input type="password" name="password"  class="form-control" id="input-reg-password" placeholder="Password">
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="input-reg-repassword">Confirm Password</label>
+	                        <input type="password" name="repassword"  class="form-control" id="input-reg-repassword" placeholder="Confirm Password">
+	                    </div>
+	                    <div class="alert alert-danger" role="alert" id="reg-alert" style="display: none;">
+	                    </div>
+	                    <div class="alert alert-success" role="alert" id="reg-success" style="display: none;">
+	                        Success!
+	                    </div>
+	                    <a href="javascript:;" class="login-reg-switch colMint">Already have an account? <i class="far fa-hand-point-right">&nbsp;</i>Login Now</a>
+	                </div>
+	                <!-- change here to switch login and register -->
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	                <div class="line" id="Login-button"><span class="colDark"></span><button class="btn btn-primary"><i class="fas fa-chevron-circle-right">&nbsp;</i>Login</button></div>
+	                <div class="line" style="display: none;" id="Reg-button"><span class="colDark"></span><button class="btn btn-primary"><i class="fas fa-chevron-circle-right">&nbsp;</i>Register</button></div>
+	                <!-- <div class="line"><span class="colDark"></span><button>登 录</button></div> -->
+	            </div>
+
+	        </div>
+	    </div>
+	</div>
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="/public/js/jquery.jpanelmenu.js"></script>
+	<script src="/public/js/menutrigger.js"></script>
+
+	<script src="/public/js/scripts.js"></script>
+	<script src="/public/js/comment.js"></script>
+</body>
+</html>

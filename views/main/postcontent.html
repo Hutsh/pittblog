@@ -1,0 +1,82 @@
+
+
+{%block postcontent%}
+    {%for content in contents%}
+    <div class="card post-card">
+        <div class="card-body">
+        	<h2 class="card-title font-weight-bold"><a href="/post/{{content.id}}">{{content.title}}</a></h2>
+            
+            <p>{{content.description}}</p>
+
+        </div>
+        <div class="card-footer text-muted post-footer">
+            <i class="far fa-clock post-info-inline"></i>
+            <p class="post-info-inline">Time:</p>
+            <p class="post-info-inline">{{content.addTime|date('Y M d H:i', 5*60)}}</p>
+            <p class="post-info-inline">·&nbsp;</p>
+            <i class="far fa-bookmark post-info-inline"></i>
+            <p class="post-info-inline">Category: </p>
+            <a class="post-info-inline">{{content.category}}</a>
+            <p class="post-info-inline">·&nbsp;</p>
+            <i class="far fa-eye post-info-inline"></i>
+            <p class="post-info-inline">Views: </p>
+            <a class="post-info-inline">{{content.views}}</a>
+            <p class="post-info-inline">·&nbsp;</p>
+            <i class="far fa-comment-dots post-info-inline"></i>
+            <p class="post-info-inline">Comments: </p>
+            <a class="post-info-inline">{{content.comments.length}}</a>
+            <!-- <div class="function"><a href="/post/{{content.id}}">阅读全文</a></div>  -->
+            <!-- todo: change read more sytle -->
+        </div>
+    </div>
+    {%endfor%}
+
+
+
+<!--     <div class="listBox">
+        <h1>{{content.title}}</h1>
+        <p class="colDefault">
+            作者：<span class="colInfo">{{content.user.username}}</span> -
+            时间：<span class="colInfo">{{content.addTime|date('Y年m月d日 H:i:s', -8*60)}}</span> -
+            阅读：<span class="colInfo">{{content.views}}</span> -
+            评论：<span class="colInfo">{{content.comments.length}}</span>
+        </p>
+        <dfn><p>{{content.description}}</p></dfn>
+        <div class="function"><a href="/view?contentid={{content.id}}">阅读全文</a></div>
+    </div>
+    -->
+
+    <div class="pager">
+        <ul class="clear">
+
+            <li class="previous">
+
+                {%if page <= 1%}
+                <span>This is the first page</span>
+                {%else%}
+                <!-- <a href="/?category={{category}}&page={{page-1}}">上一页</a> -->
+                <a href="/page/{{page-1}}">上一页</a>
+                {%endif%}
+
+            </li>
+
+            {%if pages > 0%}
+            <li>
+                <strong>{{page}} / {{pages}}</strong>
+            </li>
+            {%endif%}
+
+            <li class="next">
+
+                {%if page >= pages%}
+                <span>This is the last page</span>
+                {%else%}
+                <a href="/page/{{page+1}}">下一页</a>
+                <!-- <a href="/?category={{category}}&page={{page+1}}">下一页</a> -->
+                {%endif%}
+
+            </li>
+
+        </ul>
+    </div>
+{%endblock%}

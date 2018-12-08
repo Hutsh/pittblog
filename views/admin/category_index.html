@@ -13,7 +13,7 @@
     <tr>
         <th>ID</th>
         <th>Category</th>
-        <th>操作</th>
+        <th>Action</th>
     </tr>
 
     {% for category in categories %}
@@ -21,7 +21,8 @@
         <td>{{category._id.toString()}}</td>
         <td>{{category.name}}</td>
         <td>
-            <button type="button" class="btn btn-outline-primary btn-sm"><a href="/admin/category/edit/{{category._id.toString()}}">EDIT</a></button>
+<!--             <button type="button" class="btn btn-outline-primary btn-sm"><a href="/admin/category/edit/{{category._id.toString()}}">EDIT</a></button> -->
+            <button type="button" onclick="catEditPopup(this)" class="btn btn-outline-primary btn-sm" name="{{category._id.toString()}}" value="{{category.name}}">EDIT</button>
             <button type="button" onclick="delcat(this);" name="{{category._id.toString()}}" class="btn btn-outline-danger btn-sm">DEL</button>
         </td>
     </tr>
@@ -29,6 +30,36 @@
 
 </table>
 
-<!--{% include 'page.html' %} -->
+<button type="button" class="btn btn-primary" id="btnAddNewCat">Add New Category</button>
+
+<div class="modal fade" id="catEditModel" tabindex="-1" role="dialog" aria-labelledby="catEditModelTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="catEditModelTitle">Edit Category: ??</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="catEditModelId"></p>
+
+        <form>
+          <div class="form-group">
+            <label for="new-cat-name" class="col-form-label">New Category Name:</label>
+            <input type="text" class="form-control" id="new-cat-name">
+          </div>
+        </form>
+        <div id="submitsuccess" class="alert alert-success" style="display:none;" role="alert">Success</div>
+        <div id="submitwarning" class="alert alert-danger" style="display:none;" role="alert"></div>
+      </div>
+      <input type="hidden" class="form-control" id="catEditModelCatId">
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="catEditModelComfirm" class="btn btn-primary">Comfirm Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
