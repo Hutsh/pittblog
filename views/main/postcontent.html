@@ -11,20 +11,25 @@
         </div>
         <div class="card-footer text-muted post-footer">
             <i class="far fa-clock post-info-inline"></i>
-            <p class="post-info-inline">Time:</p>
+            <!-- <p class="post-info-inline">Time:</p> -->
             <p class="post-info-inline">{{content.addTime|date('Y M d H:i', 5*60)}}</p>
             <p class="post-info-inline">·&nbsp;</p>
             <i class="far fa-bookmark post-info-inline"></i>
-            <p class="post-info-inline">Category: </p>
-            <a class="post-info-inline">{{content.category}}</a>
+            <!-- <p class="post-info-inline">Category: </p> -->
+            <a class="post-info-inline text-uppercase">{{content.category}}</a>
             <p class="post-info-inline">·&nbsp;</p>
             <i class="far fa-eye post-info-inline"></i>
-            <p class="post-info-inline">Views: </p>
+            <!-- <p class="post-info-inline">Views: </p> -->
             <a class="post-info-inline">{{content.views}}</a>
             <p class="post-info-inline">·&nbsp;</p>
             <i class="far fa-comment-dots post-info-inline"></i>
-            <p class="post-info-inline">Comments: </p>
+            <!-- <p class="post-info-inline">Comments: </p> -->
             <a class="post-info-inline">{{content.comments.length}}</a>
+            {% if content.location != '' %}
+                <p class="post-info-inline">·&nbsp;</p>
+                <i class="fas fa-map-marker-alt"></i>
+                <a class="post-info-inline">{{content.location}}</a>
+            {% endif %}
         </div>
     </div>
     {%endfor%}

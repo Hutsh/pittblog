@@ -1,6 +1,46 @@
 // contents js in pages
 
 $(function() {
+  $('#button-location').click(function(){
+    console.log("location");
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position, err){
+
+        console.log("Latitude: " + position.coords.latitude)
+        console.log("Longitude: " + position.coords.longitude);
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude
+        var res_city = ""
+        var res_state = ""
+
+        var key = "AYrApEKGTwuYJGUKqJdyPgwd3TobLvRo"
+        var requrl = "http://www.mapquestapi.com/geocoding/v1/reverse?key=" + key + "&location=" + lat + "," + lng + "&"
+        console.log("requrl=" + requrl);
+        $.ajax({
+            type: 'get',
+            url: requrl,
+            success: function(result) {
+              console.log(result.results[0]);
+              res_city = result.results[0].locations[0].adminArea5
+              res_state = result.results[0].locations[0].adminArea3
+              current_location = res_city + ", " + res_state
+              $('#ipt-postLocation').val(current_location)
+              $('#locationPreview').attr("src",result.results[0].locations[0].mapUrl).show();
+            }
+        })
+
+      });
+    }
+    else{
+      console.log("Geolocation is not supported by this browser.");
+    }
+  })
+
+})
+
+
+
+$(function() {
 
     initialValue = ($('#pre-content').val())? $('#pre-content').val() : "" 
 
@@ -33,6 +73,7 @@ $(function() {
                 category: $("#category option:selected").text(),
                 description: $('#description').val(),
                 content: testPlain,
+                location: $('#ipt-postLocation').val(),
                 addTime: new Date()
             }),
             contentType: 'application/json',
@@ -97,7 +138,8 @@ $(function() {
           title: $('#title').val(),
           category: $( "#category option:selected" ).text(),
           description: $('#description').val(),
-          content: testPlain
+          content: testPlain,
+          location: $('#ipt-postLocation').val()
         }),
         contentType: 'application/json',
         dataType: 'json',

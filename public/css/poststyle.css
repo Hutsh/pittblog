@@ -233,7 +233,7 @@ h2 {
 
 /*post style goes here (post-content-warp)*/
 .post-content-warp{
-    padding-top: 30px;
+    /*padding-top: 30px;*/
     font-size: 18px;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }

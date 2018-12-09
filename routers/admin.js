@@ -359,13 +359,14 @@ router.post('/post', function(req, res) {
     }
 
     //save to db
-    console.log("post addTime(Back End):" + req.body.addTime);
+    // console.log("location:" + req.body.location);
     new Post({
         category: req.body.category,
         title: req.body.title,
         user: req.userInfo._id.toString(),
         description: req.body.description,
         content: req.body.content,
+        location: req.body.location,
         addTime: req.body.addTime,
     }).save().then(function(rs) {
       responseData.code = 0
@@ -444,7 +445,8 @@ router.put('/post/:id', function(req, res) {
         category: req.body.category,
         title: req.body.title,
         description: req.body.description,
-        content: req.body.content
+        content: req.body.content,
+        location: req.body.location
     }).then(function(rs) {
       responseData.code = 0
       responseData.message = 'Success'

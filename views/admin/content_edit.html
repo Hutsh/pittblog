@@ -25,14 +25,25 @@
         </select>
     </div>
 
+    <!-- test location -->
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-secondary" type="button" id="button-location">Use current location</button>
+      </div>
+      <input type="text" id="ipt-postLocation" class="form-control" placeholder="Use current location or input other location" aria-label="" aria-describedby="button-location">
+    </div>
+    <img src="" id="locationPreview" style="display: none;">
+
+    <!-- test location -->
+
     <div class="form-group">
-        <label for="title">Title:</label>
+        <label for="title" class="mt-2">Title:</label>
         <div id="title-warning" class="alert alert-danger" style="display: none;" role="alert"></div>
         <input type="text" value="{{content.title}}" class="form-control" id="title" name="title">
     </div>
 
     <div class="form-group">
-        <label for="description">Description:</label>
+        <label for="description" class="mt-2">Description:</label>
         <div id="description-warning" class="alert alert-danger" style="display: none;" role="alert"></div>
         <textarea name="description" id="description" class="form-control" rows="5">{{content.description}}</textarea>
     </div>

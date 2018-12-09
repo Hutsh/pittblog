@@ -23,20 +23,25 @@
         <main class="post-content-warp">
             <div class="post-info">
                 <i class="far fa-clock"></i>
-                <p>Time:</p>
+                <!-- <p>Time:</p> -->
                 <p>{{content.addTime|date('Y M d, H:i', 5*60)}}</p>
                 <p>·</p>
                 <i class="far fa-bookmark"></i>
-                <p>Category: </p>
-                <a href="">{{content.category}}</a>
+                <!-- <p>Category: </p> -->
+                <a href="/category/{{content.category}}" class="text-uppercase">{{content.category}}</a>
                 <p class="post-info-inline">·&nbsp;</p>
                 <i class="far fa-eye post-info-inline"></i>
-                <p class="post-info-inline">Views: </p>
+                <!-- <p class="post-info-inline">Views: </p> -->
                 <a class="post-info-inline">{{content.views}}</a>
                 <p class="post-info-inline">·&nbsp;</p>
                 <i class="far fa-comment-dots post-info-inline"></i>
-                <p class="post-info-inline">Comments: </p>
+                <!-- <p class="post-info-inline">Comments: </p> -->
                 <a class="post-info-inline">{{content.comments.length}}</a>
+                {% if content.location != '' %}
+                    <p class="post-info-inline">·&nbsp;</p>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p class="post-info-inline">{{content.location}}</p>
+                {% endif %}
             </div>
             <h1>{{content.title}}</h1>
             <p class="post-detail">
