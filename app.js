@@ -78,7 +78,7 @@ app.get('*', function(req, res) {
     res.render('main/404');
 });
 
-mongoose.connect('mongodb://localhost:27017/pittblogdb', { useNewUrlParser: true }, function(err) {
+mongoose.connect('mongodb://localhost:27017/pittblog', { useNewUrlParser: true }, function(err) {
     if (err) {
         console.log('Failed connect')
     } else {
