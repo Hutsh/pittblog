@@ -24,17 +24,17 @@ swig.setDefaults({ cache: false }) // disable chche
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json({ type: 'application/json' })) // RESTful
 
-// 设置cookie
+// set cookie
 app.use(function(req, res, next) {
     req.cookies = new Cookies(req, res)
 
-    // 解析登录用户的cookie信息
+    // parse cookies
     req.userInfo = {}
     if (req.cookies.get('userInfo')) {
         try {
             req.userInfo = JSON.parse(req.cookies.get('userInfo'))
             // console.log("req.userInfo type:" + typeof(req.userInfo));
-            // 获取当前登录用户的类型，是否是管理员
+            // is admin
             // console.log("req.userInfo:" + req.userInfo.username);
             User.findById(req.userInfo._id).then(function(userInfo) {
                 // console.log("userInfo" + userInfo);
@@ -54,20 +54,6 @@ app.use(function(req, res, next) {
     }
 })
 
-// // 设置cookie
-// app.use(function (req, res, next) {
-//   req.cookies = new Cookies(req, res)
-
-//   console.log(req.cookies)
-//   // 解析登录用户的cookie信息
-
-//   try{
-//    req.userInfo = req.cookies.get('userInfo')
-//   } catch(e) {
-
-//   }
-
-// })
 
 // models
 app.use('/admin', require('./routers/admin'))

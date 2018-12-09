@@ -2,7 +2,6 @@
 $(function () {
   // add category
   $('#add-category').find('button').on('click', function () {
-    // 通过ajax提交请求
 
     $.ajax({
       type: 'post',
