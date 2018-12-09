@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var User = require('../models/User')
-var Content = require('../models/Content');
+var Post = require('../models/Post');
 var sha1 = require('sha1')
 
 var responseData
@@ -138,7 +138,7 @@ router.post('/user/logout', function (req, res) {
 router.get('/comment', function(req, res) {
     var contentId = req.query.contentid || '';
 
-    Content.findOne({
+    Post.findOne({
         _id: contentId
     }).then(function(content) {
         responseData.data = content.comments;
@@ -157,14 +157,14 @@ router.post('/comment', function(req, res) {
     };
 
     //get the content information
-    Content.findOne({
+    Post.findOne({
         _id: contentId
     }).then(function(content) {
         content.comments.push(postData);
         return content.save();
-    }).then(function(newContent) {
+    }).then(function(newPost) {
         responseData.message = 'commnet successfull';
-        responseData.data = newContent;
+        responseData.data = newPost;
         res.json(responseData);
     });
 });

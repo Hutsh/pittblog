@@ -15,7 +15,7 @@ var md = require('markdown-it')({
 var router = express.Router();
 
 var Category = require('../models/Category');
-var Content = require('../models/Content');
+var Post = require('../models/Post');
 var User = require('../models/User')
 
 var multer  = require('multer')
@@ -52,7 +52,7 @@ router.get('(/page/)?:page?', function(req, res, next) {
     data.page = Number(req.params.page || 1);
     data.limit = 10;
     data.pages = 0;
-    Content.count().then(function(count) {
+    Post.count().then(function(count) {
         data.count = count;
         data.pages = Math.ceil(data.count / data.limit);
         data.page = Math.min(data.page, data.pages);
@@ -60,7 +60,7 @@ router.get('(/page/)?:page?', function(req, res, next) {
 
         var skip = (data.page - 1) * data.limit;
 
-        return Content.find().limit(data.limit).skip(skip).populate(['user']).sort({
+        return Post.find().limit(data.limit).skip(skip).populate(['user']).sort({
             addTime: -1
         });
 
@@ -78,7 +78,7 @@ router.get('/post/:id', function(req, res) {
 
     var contentId = req.params.id || '';
 
-    Content.findOne({
+    Post.findOne({
         _id: contentId
     }, function(err, post){
         if(err){
@@ -111,7 +111,7 @@ router.get('/archive', function(req, res) {
 
     var postsByMonth = [];
 
-    Content.find().populate(['user']).sort({
+    Post.find().populate(['user']).sort({
         addTime: -1
     }).then(function(posts) {
         var mark = ""
@@ -176,7 +176,7 @@ router.get('/category', function(req, res) {
 //category
 router.get('/category/:category', function(req, res) {
     console.log("loading category:"+req.params.category);
-    Content.where('category').eq(req.params.category).populate(['user']).sort({ 
+    Post.where('category').eq(req.params.category).populate(['user']).sort({ 
         addTime: -1 
     }).then(function(posts){
         data.contents = posts;
@@ -195,7 +195,7 @@ router.get('/about', function(req, res) {
 
     var contentId = req.params.id || '';
 
-    Content.findOne({
+    Post.findOne({
         "title" : "About",
     }, function(err, post){
         if(err){

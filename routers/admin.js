@@ -3,7 +3,7 @@ var router = express.Router()
 var mongoose = require('mongoose')
 var User = require('../models/User');
 var Category = require('../models/Category');
-var Content = require('../models/Content');
+var Post = require('../models/Post');
 
 var responseData
 
@@ -283,7 +283,7 @@ router.get('/post(/page:page?)?', function(req, res) {
 
     // console.log("_______page:"+page);
 
-    Content.count().then(function(count) {
+    Post.count().then(function(count) {
 
         pages = Math.ceil(count / limit);
         page = Math.min( page, pages );
@@ -291,7 +291,7 @@ router.get('/post(/page:page?)?', function(req, res) {
 
         var skip = (page - 1) * limit;
 
-        Content.find().limit(limit).skip(skip).populate('user').sort({
+        Post.find().limit(limit).skip(skip).populate('user').sort({
             addTime: -1
         }).then(function(contents) {
             res.render('admin/content_index', {
@@ -359,7 +359,7 @@ router.post('/post', function(req, res) {
     }
 
     //save to db
-    new Content({
+    new Post({
         category: req.body.category,
         title: req.body.title,
         user: req.userInfo._id.toString(),
@@ -388,7 +388,7 @@ router.get('/post/edit/:id', function(req, res) {
     // console.log('edit categories='+categories)
 
     Category.find().sort({_id: -1}).then(function(categories) { // get all cats
-      Content.findOne({ _id: id }).then(function(content){
+      Post.findOne({ _id: id }).then(function(content){
         res.render('admin/content_edit', {
             userInfo: req.userInfo,
             categories: categories,
@@ -437,7 +437,7 @@ router.put('/post/:id', function(req, res) {
         return
     }
 
-    Content.updateOne({
+    Post.updateOne({
         _id: id
     }, {
         category: req.body.category,
@@ -459,7 +459,7 @@ router.put('/post/:id', function(req, res) {
 router.delete('/post/:id', function(req, res) {
     var id = req.params.id || '';
 
-    Content.remove({
+    Post.remove({
         _id: id
     }).then(function(rs) {
       responseData.code = 0
