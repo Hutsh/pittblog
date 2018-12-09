@@ -10,7 +10,8 @@ $('#messageBtn').on('click', function() {
         url: '/api/comment',
         data: {
             contentid: $('#contentId').val(),
-            content: $('#messageContent').val()
+            content: $('#messageContent').val(),
+            postTime: new Date()
         },
         success: function(responseData) {
             //console.log(responseData);

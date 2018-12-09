@@ -122,11 +122,12 @@ router.get('/comment', function(req, res) {
 
 // submit commnet router.post('/comment/post', function(req, res) {
 router.post('/comment', function(req, res) {
+  console.log();
 
     var contentId = req.body.contentid || ''; //todo: contentid ->postid
     var postData = {
         username: req.userInfo.username,
-        postTime: new Date(),
+        postTime: req.body.postTime,
         content: req.body.content
     };
 
