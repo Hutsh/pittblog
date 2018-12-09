@@ -101,6 +101,7 @@ h2 {
 
 .container-panel {
     padding: 0;
+    -webkit-overflow-scrolling: touch;
     /*box-shadow: #000 2px 2px 10px;*/
     /*
     -webkit-box-shadow: -8px 0px 10px 0px rgba(34,34,36,0.75);
