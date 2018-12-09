@@ -114,6 +114,34 @@ router.get('/archive', function(req, res) {
     Post.find().populate(['user']).sort({
         addTime: -1
     }).then(function(posts) {
+
+        // var mark = ""
+        // var monthPost = {
+        //     month: mark,
+        //     posts: []
+        // }
+        // for (var i = 0; i < posts.length; i++) {
+        //     newmark = monthNames[posts[i].addTime.getMonth()] + " " + posts[i].addTime.getFullYear()
+        //     if(newmark != mark){ // new month
+        //         if (mark != "") { // not first item, push previous
+        //             postsByMonth.push(monthPost)
+        //             mark = newmark;
+        //             monthPost = {
+        //                 month: mark,
+        //                 posts: []
+        //             }
+        //         }
+        //         monthPost.posts.push(posts[i])
+        //     }else{ // same as previous
+        //         monthPost.posts.push(posts[i])
+        //         if(i == posts.length-1){ //is last item
+        //             postsByMonth.push(monthPost)
+        //         }
+        //     }
+        // }
+
+
+        // OK -->
         var mark = ""
         for (var i = 0; i < posts.length; i++) {
             newmark = monthNames[posts[i].addTime.getMonth()] + " " + posts[i].addTime.getFullYear()
@@ -134,9 +162,14 @@ router.get('/archive', function(req, res) {
                 }
             } else {
                 monthPost.posts.push(posts[i])
+                if(i == posts.length-1){ //is last item
+                    postsByMonth.push(monthPost)
+                }
+
             }
         }
         postsByMonth.push(monthPost)
+        // OK<-
 
         return postsByMonth
     }).then(function(postsByMonth) {
