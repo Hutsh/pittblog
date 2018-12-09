@@ -73,6 +73,10 @@ app.use(function (req, res, next) {
 app.use('/admin', require('./routers/admin'))
 app.use('/api', require('./routers/api'))
 app.use('/', require('./routers/main'))
+app.get('*', function(req, res){
+  
+  res.render('main/404');
+});
 
 mongoose.connect('mongodb://localhost:27017/pittblogdb', { useNewUrlParser: true }, function (err) {
   if (err) {

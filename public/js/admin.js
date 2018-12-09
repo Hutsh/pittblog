@@ -110,68 +110,6 @@ function delcat(btn){
 }
 
 
-//edit post PUT
-$(function () {
-  $('#post-edit-submit').on('click', function () {
-    console.log("here to edit post:" + $('#post-id-input').val());
-
-
-    $.ajax({
-      type: 'put',
-      url: '/admin/post/' + $('#post-id-input').val(),
-      data: JSON.stringify({
-        title: $('#title').val(),
-        category: $( "#category option:selected" ).text(),
-        description: $('#description').val(),
-        content: $('#content').val()
-      }),
-      contentType: 'application/json',
-      dataType: 'json',
-      success: function (result) {
-        console.log(result);
-        if(result.code == 0){
-          console.log('success');
-
-          $('#editPostInfoModel').modal('show');
-          $('#success-info').show()
-          $('#success-info').html('Success! ')
-        }else{
-          if (result.message === 'Empty category'){
-            $('#category-warning').show()
-            $('#category-warning').html(result.message)
-              setTimeout(function () {
-                    $('#category-warning').hide()
-            }, 1000)
-          }
-          if (result.message === 'Empty title'){
-            $('#title-warning').show()
-            $('#title-warning').html(result.message)
-              setTimeout(function () {
-                    $('#title-warning').hide()
-            }, 1000)
-          }
-          if (result.message === 'Empty description'){
-            $('#description-warning').show()
-            $('#description-warning').html(result.message)
-              setTimeout(function () {
-                    $('#description-warning').hide()
-            }, 1000)
-          }
-          if (result.message === 'Empty content'){
-            $('#content-warning').show()
-            $('#content-warning').html(result.message)
-              setTimeout(function () {
-                    $('#content-warning').hide()
-            }, 1000)
-          }
-        }
-        
-      }
-    })
-
-
-  })
-})
 
 function delpost(btn){
   id = btn.name;

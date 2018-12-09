@@ -17,7 +17,7 @@ router.use(function (req, res, next) {
 
 router.use(function(req, res, next) {
     if (!req.userInfo.isAdmin) {
-        res.send('No access');
+        res.render('main/403');
         return;
     }
     next();

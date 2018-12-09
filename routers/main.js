@@ -77,13 +77,20 @@ router.get('/post/:id', function(req, res) {
     console.log('Calling: GET /post/:id=' + req.params.id);
 
     var contentId = req.params.id || '';
-    console.log(contentId);
 
     Content.findOne({
         _id: contentId
+    }, function(err, post){
+        if(err){
+            console.log("404");
+            res.render('main/404', data);
+            return
+        }else{
+            return post;
+        }
     }).populate(['user']).then(function(content) {
         console.log("----------------------------------------------");
-        console.log(content.content);
+        console.log(content);
         console.log("----------------------------------------------");
         data.content = content;
         data.markedcontent = md.render(content.content)
@@ -92,6 +99,8 @@ router.get('/post/:id', function(req, res) {
         // console.log(content.user.username);
 
         res.render('main/view', data);
+    }).catch(err => function(err){
+        console.log(err);
     });
 
 });
@@ -179,6 +188,40 @@ router.get('/category/:category', function(req, res) {
 
 
 })
+
+
+
+router.get('/about', function(req, res) {
+
+    var contentId = req.params.id || '';
+
+    Content.findOne({
+        "title" : "About",
+    }, function(err, post){
+        if(err){
+            console.log("404");
+            res.render('main/404', data);
+            return
+        }else{
+            return post;
+        }
+    }).populate(['user']).then(function(content) {
+        console.log("----------------------------------------------");
+        console.log(content);
+        console.log("----------------------------------------------");
+        data.content = content;
+        data.markedcontent = md.render(content.content)
+        content.views++;
+        content.save();
+        // console.log(content.user.username);
+
+        res.render('main/view', data);
+    }).catch(err => function(err){
+        console.log(err);
+    });
+
+});
+
 
 
 module.exports = router

@@ -1,15 +1,12 @@
 {% extends 'layout.html' %}
-
 {% block main %}
-
 {% include 'admin_nav.html'%}
-
-<h3 class="mt-4">New Posts https://pandao.github.io/editor.md/</h3>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script type="text/javascript" src="/public/js/editor.js"></script>
+<h3 class="mt-4">New Post</h3>
 <div id="success-info" class="alert alert-success" style="display: none;" role="alert"></div>
-
 <div role="form" method="">
-
     <div class="form-group">
         <label for="title">Choose Category:</label>
         <div id="category-warning" class="alert alert-danger" style="display: none;" role="alert"></div>
@@ -19,49 +16,52 @@
             {%endfor%}
         </select>
     </div>
-
     <div class="form-group">
         <label for="title">Title:</label>
         <div id="title-warning" class="alert alert-danger" style="display: none;" role="alert"></div>
         <input type="text" class="form-control" id="title" placeholder="Please input title" name="title">
-
-    <div class="form-group"> 
-        <label for="description">Description:</label>
-        <div id="description-warning" class="alert alert-danger" style="display: none;" role="alert"></div>
-        <textarea name="description" id="description" class="form-control" rows="5" placeholder="Please input description"></textarea>
-    </div>
-
-    <div class="form-group">
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <div id="description-warning" class="alert alert-danger" style="display: none;" role="alert"></div>
+            <textarea name="description" id="description" class="form-control" rows="5" placeholder="Please input description"></textarea>
+        </div>
+        <!--     <div class="form-group">
         <label for="content">Content:</label>
         <div id="content-warning" class="alert alert-danger" style="display: none;" role="alert"></div>
         <textarea name="content" id="content" class="form-control" rows="10" placeholder="Please input content"></textarea>
-    </div>
-
-    <button id='content-add-btn' type="submit" class="btn btn-default">Submit</button>
-</div>
+    </div> -->
 
 
-<!-- Modal -->
-<div class="modal fade" id="addPostInfoModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="alert alert-success" role="alert">
-          New post submitted!
+        <!-- editor  area -->
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <div id="content-warning" class="alert alert-danger" style="display: none;" role="alert"></div>
+            <textarea name="field" id="fieldTest" cols="30" rows="10"></textarea>
         </div>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-dark" href="/admin/post/">Go to post list</a>
-      </div>
+        <!-- editor  area -->
+
+
+        <button id='content-add-btn' type="submit" class="btn btn-default">Submit</button>
     </div>
-  </div>
-</div>
-
-
-{% endblock %}
+    <!-- Modal -->
+    <div class="modal fade" id="addPostInfoModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert">
+                        New post submitted!
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-dark" href="/admin/post/">Go to post list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
