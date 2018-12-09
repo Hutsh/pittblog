@@ -10,7 +10,7 @@
             {% if userInfo.isAdmin %}
                 <div class="dropdown dropdown-pointer">
                     <a class="dropdown-toggle" id="dropdownMenuAdmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Hi, Admin
+                        Hi, {{userInfo.username}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuAdmin">
                         <a class="dropdown-item colDark" href="/admin">Go Admin Page</a>

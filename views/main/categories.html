@@ -42,7 +42,7 @@
                         {% if userInfo.isAdmin %}
                         <div class="dropdown">
                             <a class="dropdown-toggle nav-link" id="dropdownMenuAdmin-small" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											Hi, Admin
+											Hi, {{userInfo.username}}
 										</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuAdmin-small">
                                 <button class="dropdown-item colDark" type="button"><a href="/admin">Go Admin Page</a></button>
