@@ -136,11 +136,13 @@ router.get('/archive', function(req, res) {
                 monthPost.posts.push(posts[i])
             }
         }
+        postsByMonth.push(monthPost)
 
         return postsByMonth
     }).then(function(postsByMonth) {
         console.log("--------------------------------------------");
         for (var i = 0; i < postsByMonth.length; i++) {
+            console.log("Month:" + i + "<<<");
             console.log(postsByMonth[i]);
             console.log("--------------------------------------------");
         }
