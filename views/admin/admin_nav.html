@@ -1,7 +1,39 @@
+<!--top nav bar, hide in large screen-->
+<nav class="navbar navbar-dark d-lg-none small-top">
+    <a class="navbar-brand" href="#">Management</a>
+    <button class="navbar-toggler" id="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse small-nav" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+            	<a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown-posts" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            		Posts<span class="sr-only">(current)</span>
+            	</a>
+            	<div class="dropdown-menu" aria-labelledby="navbarDropdown-posts">
+            		<a class="dropdown-item" href="/admin/post">Manage Posts</a>
+            		<div class="dropdown-divider"></div>
+            		<a class="dropdown-item" href="/admin/post/add">Add new post</a>
+            	</div>
+            </li>
+            <li class="nav-item">
+            	<a class="nav-link" href="/admin/category">Catgories</a>
+            </li>
+            <li class="nav-item">
+            	<a class="nav-link" href="/admin/user">Users</a>
+            </li>
+            <li class="nav-item">
+            	<a class="nav-link" href="/">Home</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<!-- show in large screen -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-none d-lg-block">
+	<div class="navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown-posts" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -16,16 +48,6 @@
 			<li class="nav-item">
 				<a class="nav-link" href="/admin/category">Catgories</a>
 			</li>
-<!-- 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-cat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Catgories
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown-cat">
-					<a class="dropdown-item" href="/admin/category">Manage Catgories</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="/admin/category/add">Add new Catgories</a>
-				</div>
-			</li> -->
 			<li class="nav-item">
 				<a class="nav-link" href="/admin/user">Users</a>
 			</li>
@@ -34,7 +56,7 @@
 			</li>
 		</ul>
 		<p class="my-2 my-lg-0">
-			<a href="javascript:;" style="cursor: pointer;color: #000;" id="logout">Logout <i class="fas fa-sign-out-alt"></i></a>
+			<a href="javascript:;" style="cursor: pointer;color: rgba(255,255,255,.5);" id="logout">Logout <i class="fas fa-sign-out-alt"></i></a>
 		</p>
 	</div>
 </nav>
