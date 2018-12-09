@@ -61,7 +61,7 @@
                     </div>
                     {%else%}
                     <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-                        Please <a href="#" class="alert-link" data-toggle="modal" data-target="#logincenter">Login</a> before leaving a commnet.
+                        Please <a href="#" class="alert-link" data-toggle="modal" data-backdrop="false" data-target="#logincenter">Login</a> before leaving a commnet.
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -150,7 +150,7 @@
                 </div>
                 {% endif %}
                 {% else %}
-                <a id="side-menu-login" class="menu-trigger-tri" data-toggle="modal" data-target="#logincenter"><i class="fas fa-user-alt"> &nbsp;</i>Login</a>
+                <a id="side-menu-login" class="menu-trigger-tri"  data-backdrop="false" data-toggle="modal" data-target="#logincenter"><i class="fas fa-user-alt"> &nbsp;</i>Login</a>
                 {% endif %}
             </li>
         </ul>
