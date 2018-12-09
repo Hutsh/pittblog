@@ -168,7 +168,6 @@ router.get('/archive', function(req, res) {
 
             }
         }
-        postsByMonth.push(monthPost)
         // OK<-
 
         return postsByMonth
