@@ -203,6 +203,7 @@ router.get('/upload', function(req, res, next){
 router.get('/category', function(req, res) {
     Category.find().then(function(categories) {
         data.categories = categories;
+        data.hidePage = true;
         res.render('main/categories', data);
     });
 })
@@ -215,6 +216,7 @@ router.get('/category/:category', function(req, res) {
     }).then(function(posts){
         data.contents = posts;
         data.showcat = req.params.category;
+        data.hidePage = true;
         console.log(posts);
         res.render('main/index', data);
     })
