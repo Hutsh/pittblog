@@ -14,7 +14,7 @@ $(function() {
         var res_state = ""
 
         var key = "AYrApEKGTwuYJGUKqJdyPgwd3TobLvRo"
-        var requrl = "http://www.mapquestapi.com/geocoding/v1/reverse?key=" + key + "&location=" + lat + "," + lng + "&"
+        var requrl = "https://www.mapquestapi.com/geocoding/v1/reverse?key=" + key + "&location=" + lat + "," + lng + "&"
         console.log("requrl=" + requrl);
         $.ajax({
             type: 'get',
