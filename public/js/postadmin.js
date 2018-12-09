@@ -23,7 +23,7 @@ $(function() {
         console.log("getting editor content");
         var testPlain = simplemde.value();
         // testMarkdown = simplemde.markdown(testPlain);
-        console.log("content:" + testPlain);
+        console.log("post addTime(frontEnd):" + new Date());
 
         $.ajax({
             type: 'post',
@@ -33,6 +33,7 @@ $(function() {
                 category: $("#category option:selected").text(),
                 description: $('#description').val(),
                 content: testPlain,
+                addTime: new Date()
             }),
             contentType: 'application/json',
             dataType: 'json',
@@ -86,7 +87,8 @@ $(function() {
       console.log("getting editor content");
       var testPlain = simplemde.value();
       // testMarkdown = simplemde.markdown(testPlain);
-      console.log("content:" + testPlain);
+      // console.log("content:" + testPlain);
+      console.log("post addTime(frontEnd):" + new Date());
 
       $.ajax({
         type: 'put',

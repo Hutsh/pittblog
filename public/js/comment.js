@@ -88,7 +88,7 @@ function formatDate(d) {
 
     var date1 = new Date(d);
 
-    var houroffert = 9
+    var houroffert = 0
 
     date = date1.getDate(); date = ("0"+date).substr(-2);
     hour = date1.getHours(); hour = (hour+houroffert)%24; hour = ("0"+hour).substr(-2);

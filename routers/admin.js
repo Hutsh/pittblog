@@ -359,13 +359,14 @@ router.post('/post', function(req, res) {
     }
 
     //save to db
+    console.log("post addTime(Back End):" + req.body.addTime);
     new Post({
         category: req.body.category,
         title: req.body.title,
         user: req.userInfo._id.toString(),
         description: req.body.description,
         content: req.body.content,
-        addTime: new Date(),
+        addTime: req.body.addTime,
     }).save().then(function(rs) {
       responseData.code = 0
       responseData.message = 'Success'
