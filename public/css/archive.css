@@ -1,0 +1,74 @@
+#content {
+	text-align: left;
+}
+/* Timeline */
+.timeline {
+	border-left: 4px solid #aaaaaa;
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+	background: rgba(0, 0, 0, 0.03);
+	color: rgba(0, 0, 0, 0.8);
+	font-family: 'Chivo', sans-serif;
+	margin: 0 0 50px 100px;
+	letter-spacing: 0.5px;
+	position: relative;
+	font-size: 1.03em;
+	padding: 20px 50px;
+	list-style: none;
+	text-align: left;
+	font-weight: 100;
+}
+.timeline .event {
+	border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+	position: relative;
+}
+.timeline .event:last-of-type {
+	padding-bottom: 0;
+	margin-bottom: 0;
+	border: none;
+}
+.timeline .event:before,
+.timeline .event:after {
+	position: absolute;
+	display: block;
+	top: 0;
+}
+.timeline .event:before {
+	left: -200px;
+	color: rgba(0, 0, 0, 0.4);
+	content: attr(data-date);
+	text-align: right;
+	font-weight: 100;
+	font-size: 0.9em;
+	min-width: 120px;
+	font-family: 'Saira', sans-serif;
+}
+.timeline .event:after {
+	box-shadow: 0 0 0 4px #cccccc;
+	left: -57.85px;
+	background: #313534;
+	border-radius: 50%;
+	height: 11px;
+	width: 11px;
+	content: "";
+	top: 5px;
+}
+
+.timeline-block a{
+	color: #333333;
+	font-family: "Droid Serif", serif;
+	text-decoration: none;
+	transition: all 0.2s ease-out;
+}
+.timeline-block a:hover{
+	margin-right: 10px;
+	color: #777777;
+	letter-spacing:2px;
+}
+
+.timeline-block {
+	padding: 0;
+	list-style: initial;
+}

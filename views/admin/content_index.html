@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+
+{% include "admin_nav.html" %}
+
+<h3>Posts, total:{{count}}</h3>
+
+
+
+<style>
+ table { table-layout: fixed; }
+ table th, table td { overflow: hidden; }
+</style>
+
+
+<table class="table table-hover">
+    <thread>
+        <tr>
+            <th style="width: 10%">ID</th>
+            <th style="width: 15%">Category</th>
+            <th style="width: 30%">Title</th>
+            <th style="width: 6%">Author</th>
+            <th style="width: 10%">Time</th>
+            <th style="width: 9%">View</th>
+            <th style="width: 20%">Action</th>
+        </tr>
+    </thread>
+
+    {% for content in contents %}
+    <tr scope="row">
+        <td style="overflow-x: scroll;">{{content._id.toString()}}</td>
+        <td>{{content.category}}</td>
+        <td style="word-break: break-all;">{{content.title}}</td>
+        <td>{{content.user.username}}</td>
+        <td>{{content.addTime|date('Y,M d H:i:s' ,5 *60)}}</td>
+        <td>{{content.views}}</td>
+        <td>
+            <a class="btn btn-outline-secondary btn-sm" href="/post/{{content._id.toString()}}">VIEW</a>
+            <a class="btn btn-outline-primary btn-sm" href="/admin/post/edit/{{content._id.toString()}}">EDIT</a>
+            <button type="button" onclick="delpost(this);" name="{{content._id.toString()}}" class="btn btn-outline-danger btn-sm">DEL</button>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" id="admin-post-nav-pre" value="{{page-1}}"><a class="page-link"href="/admin/post/page{{page-1}}">Previous</a></li>
+    <li class="page-item disabled" id="admin-post-nav-current" current="{{page}}"" total="{{pages}}"><a class="page-link" href="#"> {{page}} of {{pages}} </a></li>
+    <li class="page-item" id="admin-post-nav-next"><a class="page-link" href="/admin/post/page{{page+1}}">Next</a></li>
+  </ul>
+</nav>
+
+{% endblock %}

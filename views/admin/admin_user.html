@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+{% include "admin_nav.html" %}
+
+<h3 class="mt-4">User list</h3>
+
+
+<table class="table table-hover table-striped">
+
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Admin?</th>
+    </tr>
+
+    {% for user in users %}
+    <tr>
+        <td>{{user._id.toString()}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.password}}</td>
+        <td>
+            {%if user.isAdmin%}<i class="fas fa-check"></i>{%endif%}
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+
+
+{% endblock %}

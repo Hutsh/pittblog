@@ -1,0 +1,250 @@
+.grid-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.cols {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.col {
+  width: 25%;
+  height: 250px;
+  float: left;
+  margin: 0;
+}
+
+.col img {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.8;
+}
+
+.col h2 {
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.grid-1 {
+  width: 50%;
+}
+
+.grid-3 {
+  float: right;
+  height: 500px;
+}
+
+.grid-5 {
+  display: table;
+}
+
+.grid-5 > * {
+  display: table-cell;
+}
+
+.grid-5 > .text-container {
+  text-align: center;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.grid-5 img {
+  object-position: right;
+}
+
+.grid-7 {
+  width: 50%;
+}
+
+@supports (display: grid) or (display: -ms-grid) {
+  .grid-area {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: 250px;
+    justify-content: center;
+  }
+  .col {
+    width: 100%;
+    height: 100%;
+    float: none;
+  }
+  .grid-1 {
+    grid-column-end: span 2;
+  }
+  .grid-3 {
+    grid-row-end: span 2;
+  }
+  .grid-5 {
+    grid-column-end: span 2;
+  }
+  .grid-7 {
+    grid-column-end: span 2;
+  }
+}
+
+/* Media queries for other screen widths */
+@media screen and (max-width: 450px) {
+  .col {
+    grid-row-end: unset;
+    grid-column-end: unset;
+    height: 250px;
+  }
+  .grid-area {
+    display: flex;
+    flex-direction: column;
+  }
+  .grid-3 {
+    order: -1;
+    height: 500px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .grid-2 {
+    display: none;
+  }
+}
+
+/************ Hover effect styles *************/
+
+figure {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+}
+
+figure figcaption {
+  color: #fff;
+  backface-visibility: hidden;
+}
+
+figure figcaption::before,
+figure figcaption::after {
+  pointer-events: none;
+}
+
+figure figcaption,
+figure figcaption > a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Anchor will cover the whole item by default */
+
+/* For some effects it will show as a button */
+
+figure figcaption > a {
+  z-index: 1000;
+  text-indent: 200%;
+  white-space: nowrap;
+  font-size: 0;
+  opacity: 0;
+}
+
+figure h2 {
+  word-spacing: -0.15em;
+  font-weight: 300;
+}
+
+figure h2 span {
+  font-weight: 800;
+}
+
+figure h2,
+figure p {
+  margin: 0;
+}
+
+figure button.rww_grid_button {
+  background-color: transparent;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 0.5rem;
+  font-weight: bold;
+  font-size: smaller;
+  color: #fff;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+figure p {
+  letter-spacing: 1px;
+  font-size: smaller;
+}
+
+figure figcaption::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(72, 76, 97, 0) 0%,
+    rgba(72, 76, 97, 0.8) 75%
+  );
+  content: "";
+  opacity: 0;
+  transform: translate3d(0, 50%, 0);
+}
+
+figure h2 {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  color: #484c61;
+  transition: all 0.35s;
+  transform: translate3d(0, -50%, 0);
+}
+
+figure figcaption::before,
+figure p,
+figure .grid-button-wrapper {
+  transition: all 0.35s;
+}
+
+figure .grid-button-wrapper {
+  position: absolute;
+  bottom: 35%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+}
+
+figure p {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  padding-bottom: 3rem;
+  width: 100%;
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+}
+
+figure:hover h2 {
+  background: none;
+  color: #fff;
+  transform: translate3d(0, -50%, 0) translate3d(0, -40px, 0);
+}
+
+figure:hover figcaption::before,
+figure:hover p,
+figure:hover .grid-button-wrapper {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}

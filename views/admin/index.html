@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+
+
+
+<div class="posts-container" >
+	<div class="jumbotron">
+	    <h1>Hello, {{userInfo.username}}!</h1>
+	    <h2>Manage your website content here:</h2>
+	    <p>{% include "admin_nav.html" %}</p>
+	</div>
+</div>
+
+
+{% endblock %}

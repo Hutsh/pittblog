@@ -80,3 +80,7 @@ typings/
 
 # FuseBox cache
 .fusebox/
+
+.idea/
+
+.eslintrc.json
